@@ -7,4 +7,4 @@ Our product will be for any Florida resident or visitor who wishes to gain knowl
 - [RNun98](https://github.com/RNun98) - Robinson Nunez
 - [goodmancode](https://github.com/goodmancode) - Jacob Goodman
 - [Sairam-Nalla](https://github.com/Sairam-Nalla) - Sairam Nalla
-- [(username pending)]() - Steve Jacques
+- [SJJacques](https://github.com/SJJacques) - Steve Jacques
