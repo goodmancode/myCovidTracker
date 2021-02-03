@@ -10,15 +10,14 @@ Our product will be for any Florida resident or visitor who wishes to gain knowl
 - [SJJacques](https://github.com/SJJacques) - Steve Jacques
 
 # Sprint 1
-- [Product Backlog](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/product_backlog.md)
-- [Sprint Backlog](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/sprint_backlogs/sprint1_backlog.md)
-- [Requirements](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/requirements.md)
 - [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
+    - Contains Product Backlog, Sprint Backlog, User Story validation requirements and priority, etc.
+- [Requirements](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/requirements.md)
 - Burndown Chart
 - Velocity Chart
 
 ## Task Allocation
 - Robinson - Locating a data set with features such as 'date' and 'county' 
-- Jacob - Lesigning layout of GUI
+- Jacob - Designing layout of GUI
 - Sairam - Picking a language that is robust and good for front end development
 - Steve - Picking a coding standard for Python and a front end language
