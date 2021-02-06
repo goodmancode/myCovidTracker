@@ -1,4 +1,4 @@
-let intro = document.querySelector(".intro");
+let intro = document.querySelector('.intro');
 let logo = document.querySelector('.logo-header');
 let logoSpan = document.querySelectorAll('.logo');
 
@@ -6,14 +6,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 	setTimeout(() => {
 
-			logoSpan.forEach((span, index) => {
+			logoSpan.forEach((span, idx) => {
 				setTimeout(() => {
 					span.classList.add('active');
-				}, (idx * i) + 400)
+				}, (idx + 1) * 400)
 			});
 
 			setTimeout(() => {
-				logoSpan.forEach((span, index) => {
+				logoSpan.forEach((span, idx) => {
 
 					setTimeout(() => {
 						span.classList.remove('active');
@@ -24,6 +24,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 			setTimeout(() => {
 					intro.style.top = '-100vh';
-			}, 2300)		
+			}, 2300)
 	})
 })
