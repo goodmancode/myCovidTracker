@@ -11,10 +11,14 @@ Our product will be for any Florida resident or visitor who wishes to gain knowl
 
 # Sprint 1
 - [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
-    - Contains Product Backlog, Sprint Backlog, User Story validation requirements and priority, etc.
-- [Requirements](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/requirements.md)
-- Burndown Chart
-- Velocity Chart
+    - Product Backlog
+    - Sprint Backlog
+    - Requirements
+    - Effort & Priority
+    - etc.
+- [Burndown Chart](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/sprint_1/burndown_chart.png)
+- [Velocity Chart](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/sprint_1/velocity_chart.png)
+- Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
 
 ## Task Allocation
 - Robinson - Locating a data set with features such as 'date' and 'county' 
