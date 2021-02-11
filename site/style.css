@@ -12,14 +12,14 @@ header {
 	width: 1005;
 	height: 80px;
 }
-
+/*
 header h4 {
 	position: absolute;
 	left: 10%;
 	bottom: 1rem;
 	font-size: 1.6rem;
 }
-
+*/
 .intro {
 	position: fixed;
 	z-index: 1;
@@ -58,9 +58,63 @@ header h4 {
 	transition: ease-in-out 0.5s;
 }
 
-.github-header {
+.title-header {
 	position: absolute;
-	left: 80%;
+	left: 5%;
 	bottom: 1rem;
 	font-size: 1.6rem;
 }
+
+.github-header {
+	position: absolute;
+	right: 5%;
+	bottom: 1rem;
+	font-size: 1.6rem;
+}
+
+.dropbtn {
+ background-color: #161616;
+ color: white;
+ padding: 16px;
+ font-size: 16px;
+ border: none;
+ cursor: pointer;
+}
+
+.expand-indicator {
+ height: 16px;
+ width: 16px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+ background-color: #383838;
+}
+
+.dropdown {
+ position: relative;
+ display: inline-block;
+ position: absolute;
+ left: 5%
+}
+
+.dropdown-content {
+ display: none;
+ position: absolute;
+ background-color: #383838;
+ min-width: 160px;
+ box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+ z-index: 1;
+ height: 300px;
+ overflow-y: scroll;
+}
+
+.dropdown-content a {
+ color: white;
+ padding: 12px 16px;
+ text-decoration: none;
+ display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show {display:block;}
