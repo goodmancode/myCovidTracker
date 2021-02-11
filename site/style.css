@@ -12,14 +12,7 @@ header {
 	width: 1005;
 	height: 80px;
 }
-/*
-header h4 {
-	position: absolute;
-	left: 10%;
-	bottom: 1rem;
-	font-size: 1.6rem;
-}
-*/
+
 .intro {
 	position: fixed;
 	z-index: 1;
@@ -115,6 +108,6 @@ header h4 {
  display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd}
+.dropdown-content a:hover {background-color: #161616}
 
 .show {display:block;}
