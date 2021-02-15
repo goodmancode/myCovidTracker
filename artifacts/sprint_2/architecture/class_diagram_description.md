@@ -1,3 +1,6 @@
+# Class Diagram
+![class_diagram](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/sprint_2/architecture/class_diagram.jpg)
+
 # Class Diagram Description
 
 ## State_Metrics
