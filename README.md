@@ -39,9 +39,10 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
 - [Dataset](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/model)
 - [System Architecture](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/artifacts/sprint_2/architecture)
+- [Demonstration - front end](https://youtu.be/MD-0LkAnhnc)
 
 ## Task Allocation
-- Robinson - U003, class diagrams
+- Robinson - U003, class diagrams, demonstration
 - Jacob - U012, C4 diagrams, Interface diagram
 - Sairam - U014, ER diagrams
 - Steve - U013, Design Document
