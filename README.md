@@ -40,6 +40,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - [Dataset](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/model)
 - [System Architecture](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/artifacts/sprint_2/architecture)
 - [Demonstration - front end](https://youtu.be/MD-0LkAnhnc)
+- [Demonstration - model training](https://youtu.be/t9yuflxO-SY)
 
 ## Task Allocation
 - Robinson - U003, class diagrams, demonstration
