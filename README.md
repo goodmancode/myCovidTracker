@@ -5,8 +5,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 
 # Source for Dataset
 - [Main page](https://covidtracking.com/)
-- [API Domain Name](https://api.covidtracking.com)
-- [Dataset](https://api.covidtracking.com/v1/us/daily.csv)
+- [Dataset](https://api.covidtracking.com): Under "US Current and Historical Data" --> "Historic US values"
 - [License](https://covidtracking.com/about-data/license)
 
 ## Team Members
