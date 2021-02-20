@@ -10,7 +10,7 @@
 
 ## Class Diagrams
 
-class_diagram.jpg
+![Class Diagrams](class_diagram.jpg)
 
 ### State_Metrics
 The State_Metrics class will hold all the values calculated by the state’s specific model. It will hold values such as the predictions for up to a month. The average number of cases per day, as well as other fields such as daily percent change and metadate of the model such as the accuracy of the model. The predict_days_out method will take in the number of days in the future to get a set of predictions from and return that amount of days’ worth of predictions as a list.
