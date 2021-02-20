@@ -54,7 +54,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Sairam - U014, ER diagrams
 - Steve - U013, Design Document
 
-# Sprint 2
+# Sprint 3
 - [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
     - Product Backlog
     - Sprint Backlog
