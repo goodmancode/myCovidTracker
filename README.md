@@ -32,7 +32,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Sairam - Picking a language that is robust and good for front end development
 - Steve - Picking a coding standard for Python and a front end language
 
-# Sprint 2
+# Sprint 3
 - [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
     - Product Backlog
     - Sprint Backlog
@@ -53,3 +53,26 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Jacob - U012, C4 diagrams, Interface diagram
 - Sairam - U014, ER diagrams
 - Steve - U013, Design Document
+
+# Sprint 2
+- [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
+    - Product Backlog
+    - Sprint Backlog
+    - Requirements
+    - Effort & Priority
+    - etc.
+- [Burndown Chart](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/artifacts/sprint_2/burndown_chart.png)
+- [Velocity Chart](https://github.com/goodmancode/myflorida-covid-tracker/blob/main/artifacts/sprint_2/velocity_chart.png)
+- Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
+- [Dataset](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/model)
+- [System Architecture](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/artifacts/sprint_2/architecture)
+- [UI Mockup & Description](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/artifacts/sprint_2/UI_mockup)
+- [Demonstration - front end](https://youtu.be/MD-0LkAnhnc)
+- [Demonstration - model training](https://youtu.be/t9yuflxO-SY)
+
+## Task Allocation
+- Robinson - U005, U016, class diagrams, demonstration
+- Jacob - U012, C4 diagrams, Interface diagram
+- Sairam - U028, U016, ER diagrams
+- Steve - U013, Design Document
+
