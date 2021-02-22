@@ -34,7 +34,7 @@ My Covid tracker will not be susceptible to security breaches or untrustworthy d
 ### Scalability
 Scalability is not an issue as My Covid Tracker is not expected to grow beyond what it can handle in terms of users or database records.
 ### Interoperability
-The dataset will be acquired from the CDC via their API and will be passed through Firebase’s cloud platform for the front-end to display. The dataset will also be sent to the model regularly for training purposes. 
+The COVID-19 dataset will be acquired from the CDC via their API and will be passed through our databases for the front-end to display. The dataset will also be sent to the prediction model regularly for training purposes. Our user account system, Firebase Auth, will handle account credentials and some user information. Users will access the My Covid Tracker Single-Page Application which will in turn interact with Firebase Auth, the Machine Learning Model, and the COVID-19 database.
 
 ![Container Diagram](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/container_diagram.png)
 
