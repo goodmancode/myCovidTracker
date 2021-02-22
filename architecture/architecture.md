@@ -25,7 +25,17 @@ We will have a database for user information and a database to store current COV
 ### User Interface
 My Covid Tracker’s UI will be a webpage. The site will have a header containing the title of the project, account user/pass login, links to additional educational COVID resources, and a link to our project's GitHub. The middle-left body will hold dropdowns to manually select a US state, and select a county once state is selected. When a user selects a state, the webpage will display COVID-19 data for that state and provide risk assessment. This page will include the date the data had last been updated. It also will hold an interactive map of the US that will dynamically highlight and zoom to chosen state/county and will allow choosing state/county via mouse-click on the map. The middle-right body will hold all data and statistics, including a line graph with both historical COVID data as well as ML predictions. The user can select how many weeks in the future for the model to predict into. Case changes for user selections are represented both in percentage and numerically. The lower-left body will contain fields for risk factor entry. The risk factors will be entered first then a risk assessment in the lower-right body will be produced showing the likelihood of exposure based on the factors and location selected. This risk assessment can be saved to a user's profile if the user has created an account to track risk over time and save risk factor settings.
 
-![UI Diagram](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/UI_mockup_withUIDs.png)
+***Main page w/ UIDs***
+![UI Diagram](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/UI_mockup_withUIDs_sprint4.png)
+
+***Login Dialog***
+![UI Diagram](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/UI_mockup_login.png)
+
+***Sign Up Dialog***
+![UI Diagram](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/UI_mockup_signup.png)
+
+***Helpful Resources Dialog***
+![UI Diagram](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/UI_mockup_resources.png)
 
 ### Resource Management
 Resource management will not be of concern with My Covid Tracker as the model will only process small amounts of numeric data without the need for hardware acceleration. The resources required are well within the capabilities of the intended implementation environment.
