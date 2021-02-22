@@ -73,7 +73,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 
 ## Task Allocation
 - Robinson - U005, U016, class diagrams, demonstration
-- Jacob - U012, C4 diagrams, Interface diagram
+- Jacob - U007, interactive map, updates to C4 diagrams, Interface diagram
 - Sairam - U028, U016, ER diagrams
 - Steve - U013, Design Document
 
