@@ -1,0 +1,22 @@
+{
+  "name": "mycovidtracker",
+  "version": "1.0.0",
+  "description": " A Python and JavaScript-based web application to track COVID-19 case changes in the US and predict changes using Machine Learning.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goodmancode/myCovidTracker.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goodmancode/myCovidTracker/issues"
+  },
+  "homepage": "https://github.com/goodmancode/myCovidTracker#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
