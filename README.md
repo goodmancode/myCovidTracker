@@ -96,8 +96,8 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - [Back end source code](https://github.com/goodmancode/myCovidTracker/tree/main/model)
 
 ## Task Allocation
-- Robinson - U005, U016, class diagrams, demonstration
+- Robinson - U029, class diagrams, demonstration
 - Jacob - U007, interactive map, updates to C4 diagrams, Interface diagram
-- Sairam - U015, U016, ER diagrams
+- Sairam - U015, U029, ER diagrams
 - Steve - U018, U019, Design Document
 
