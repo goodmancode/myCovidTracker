@@ -208,7 +208,8 @@
 					<div class="col s6 yellow lighten-5">
 						<p>Risk factors:</p>
 						<div class="input-field col s12">
-							<input placeholder="Enter your age" id="age" type="text">
+							<input placeholder="Enter your age" id="age" type="text" onkeypress="return onlyNumberKey(event)" 
+							maxlength="3" >
 						</div>
 						<div class="input-field col s12">
 							<select id="location-select" name="location-select" class="browser-default">
@@ -268,6 +269,17 @@
 				$('.dropdown-trigger').dropdown();
 				$('select').formSelect();
 			});	
+
+		function onlyNumberKey(evt) { 
+		  // Only ASCII characters allowed on keypress are the digits 0-9
+		  var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
+		  if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
+			alert("Enter a number");
+			return false; 	  
+		  }
+
+		  return true; 
+	  } 
 		</script>
 	</body>
 </html>
