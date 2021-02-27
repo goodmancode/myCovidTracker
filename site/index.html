@@ -270,16 +270,15 @@
 				$('select').formSelect();
 			});	
 
-		function onlyNumberKey(evt) { 
-		  // Only ASCII characters allowed on keypress are the digits 0-9
-		  var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
-		  if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
-			alert("Enter a number");
-			return false; 	  
-		  }
-
-		  return true; 
-	  } 
+			function onlyNumberKey(evt) { 
+			// Only ASCII characters allowed on keypress are the digits 0-9
+			var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
+			if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
+				alert("Enter a number");
+				return false; 	  
+			}
+			return true; 
+			} 
 		</script>
 	</body>
 </html>
