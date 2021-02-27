@@ -99,5 +99,5 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Robinson - U005, U016, class diagrams, demonstration
 - Jacob - U007, interactive map, updates to C4 diagrams, Interface diagram
 - Sairam - U015, U016, ER diagrams
-- Steve - U030, Design Document
+- Steve - U018, U019, Design Document
 
