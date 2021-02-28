@@ -39,14 +39,12 @@ window.onload = function () {
         st[0].onmouseover = function () {
           st.animate({fill: st.color}, 500);
           st.toFront();
-          R.safari();
         };
 
         st[0].onmouseout = function () {
           if (st != curState) {
               st.animate({fill: "#d3d3d3"}, 500);
               st.toFront();
-              R.safari();
           }
         };
 
@@ -68,7 +66,6 @@ window.onload = function () {
           prevState.toFront();
           curState.animate({fill: st.color}, 500);
           curState.toFront();
-          R.safari();
         };
 
         // Changes the highlighted state when user changes the dropdown selection
@@ -79,7 +76,6 @@ window.onload = function () {
           prevState.toFront();
           curState.animate({fill: curState.color}, 500);
           curState.toFront();
-          R.safari();
         };
                    
       })(usRaphael[state], state);
