@@ -14,6 +14,15 @@ window.onload = function () {
     var curState;
     var prevState;
 
+    // Removes fixed width & height attributes
+    // Combine with css width and height of 100% to make map scale to fit its container.
+    var svg = document.querySelector("svg");
+    svg.removeAttribute("width");
+    svg.removeAttribute("height");
+
+    // Resizes viewbox of map with less margin
+    R.setViewBox(0,0,925,600,true);
+
     //Draw Map and store Raphael paths
     for (var state in usMap) {
       usRaphael[state] = R.path(usMap[state]).attr(attr);
