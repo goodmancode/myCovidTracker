@@ -13,6 +13,18 @@ header {
 	height: 80px;
 }
 
+body {
+	background-color:#FFFFFF;
+	background-image: url("https://www.transparenttextures.com/patterns/tiny-grid.png");
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
 .intro {
 	position: fixed;
 	z-index: 1;
