@@ -1,7 +1,6 @@
 from os import path
 import schedule, time, requests
 from urllib.error import HTTPError
-from StateMetrics import StateMetrics
 
 import numpy as np
 import pandas as pd
@@ -22,7 +21,12 @@ def make_request(url):
 
 
 def api_call():
-    url = 'https://api.covidtracking.com/v1/states/daily.csv'
+    url = 'https://data.cdc.gov/resource/9mfq-cb36.csv'
+
+    # api does not return full dataset. Limit has to be
+    # specified to get all data
+    limit = '?$limit=30000'
+
     response = make_request(url)
     success = 200
 
@@ -30,16 +34,16 @@ def api_call():
         response = make_request(url)
         print('Trying again...')
 
-    open('dataset.csv', 'wb').write(response.content)
+    df = pd.read_csv(url + limit)
+    dir_path = path.dirname(path.realpath(__file__)) + '/dataset.csv'
+    df.to_csv(dir_path)
 
     return
 
 def refresh_data():
 
-    # Data is updated between 6:00 and 7:30 daily
-    schedule.every().day.at("18:00").do(api_call)
-    schedule.every().day.at("19:30").do(api_call)
-
+    # Data is updated daily
+    schedule.every().day.at('19:30').do(api_call)
     schedule.every(1).seconds.do(api_call)
 
     # Only make the api call if the dataset doesn't exist in the current
