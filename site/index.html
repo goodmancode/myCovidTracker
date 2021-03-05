@@ -118,7 +118,43 @@
 						<label for="login-password">Password</label>
 					</div>
 					<button class="btn-small">Login</button>
+					<button class="btn-small"><a href="#" class="modal-trigger white-text" data-target="modal-reset">Forgot Password?</a></button>
 				</form>
+			</div>
+		</div>
+
+		<!-- alert modal invalid number entry -->
+		<div id="modal-invalid" class="modal bottom-sheet">
+			<div class="modal-content">
+				<h4>Please enter a number</h4>
+			</div>
+			<div class="modal-footer">
+				<button class="btn-small modal-close">Okay</a>
+			</div>
+		</div>
+
+		<!-- password reset modal -->
+		<div id="modal-reset" class="modal">
+			<div class="modal-content">
+				<h4>Reset Password</h4><br />
+				<form id="reset-form">
+					<div class="input-field">
+						<input type="email" id="reset-email" required />
+						<label for="reset-email">Email</label>
+					</div>
+					<button class="btn-small">Reset Password</button>
+				</form>
+			</div>
+		</div>
+
+		<!-- alert modal password reset email sent -->
+		<div id="modal-reset-notice" class="modal bottom-sheet">
+			<div class="modal-content">
+				<h4>Password reset email sent.</h4>
+				<p>Be sure to check your spam folder for the email.</p>	
+			</div>
+			<div class="modal-footer">
+				<button class="btn-small modal-close">Okay</a>
 			</div>
 		</div>
 
@@ -292,13 +328,15 @@
 				$('.sidenav').sidenav();
 				$('.dropdown-trigger').dropdown();
 				$('select').formSelect();
+				$('.tooltipped').tooltip();
 			});	
 
 			function onlyNumberKey(evt) { 
 			// Only ASCII characters allowed on keypress are the digits 0-9
 			var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
 			if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
-				alert("Enter a number");
+				$('#modal-invalid').modal('open');
+				// alert("Enter a number");
 				return false; 	  
 			}
 			return true; 

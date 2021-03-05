@@ -55,3 +55,25 @@ loginForm.addEventListener('submit', (e) => {
         loginForm.reset();
     })
 })
+
+// password reset
+const resetForm = document.querySelector('#reset-form');
+resetForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // store input
+    const email = resetForm['reset-email'].value;
+
+    // ship to firebase auth
+    auth.sendPasswordResetEmail(email).then(cred => {
+        const modal = document.querySelector('#modal-reset');
+        // close form and reset fields after submission
+        M.Modal.getInstance(modal).close();
+        resetForm.reset();
+        // Email sent, alert user
+        $('#modal-reset-notice').modal('open');
+      }).catch(function(error) {
+        // An error happened.
+      });
+})
+
