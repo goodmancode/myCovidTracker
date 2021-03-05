@@ -71,6 +71,7 @@ resetForm.addEventListener('submit', (e) => {
         M.Modal.getInstance(modal).close();
         resetForm.reset();
         // Email sent, alert user
+        $('#modal-login').modal('close');
         $('#modal-reset-notice').modal('open');
       }).catch(function(error) {
         // An error happened.
