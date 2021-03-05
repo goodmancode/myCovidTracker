@@ -259,26 +259,26 @@
 							<div class="col s12 center-align">
 								<h5>Risk Factors</h5>
 							</div>
+							<div class="input-field col s6">
+								<select id="location-select" name="location-select" class="browser-default z-depth-1">
+								  <option value="" disabled selected>Choose the risk level of the places you intend to go</option>
+								  <option value="1" title="I plan to visit sparsely populated areas with open air or good ventilation.">Low</option>
+								  <option value="2" title="I plan to visit highly populated areas with open air or good ventilation or areas with poor ventilation that are sparsely populated.">Medium</option>
+								  <option value="3" title="I plan to visit highly populated areas with poor ventilation.">High</option>
+								</select>
+							</div>
+							<div class="input-field col s6">
+								<select id="interaction-select" name="interaction-select" class="browser-default z-depth-1">
+								  <option value="" disabled selected>Choose your intended level of interaction</option>
+								  <option value="1" title="I will interact with few people and few things other people touch; this means you will keep interation to a minimum and do things like order groceries.">Low</option>
+								  <option value="2" title="I will interact with a moderate amount of people and things other people touch; this means you will do things like use shopping carts and public doors.">Medium</option>
+								  <option value="3" id="high" title="I will interact with many people and things other people touch; this means you will do things like handling money and going out to eat frequently or you work in a high traffic environment.">High</option>
+								</select>
+							</div>
 							<div class="col s3">
 								<div class="input-field">
 									<input placeholder="Enter age here" id="age" type="text" onkeypress="return onlyNumberKey(event)" maxlength="3" >
 								</div>
-							</div>
-							<div class="input-field col s12">
-								<select id="location-select" name="location-select" class="browser-default z-depth-1">
-								  <option value="" disabled selected>Choose the types of places you intend to visit</option>
-								  <option value="1">Low: I plan to visit sparsely populated areas with open air or good ventilation.</option>
-								  <option value="2">Medium: I plan to visit highly populated areas with open air or good ventilation or areas with poor ventilation that are sparsely populated.</option>
-								  <option value="3">High: I plan to visit highly populated areas with poor ventilation.</option>
-								</select>
-							</div>
-							<div class="input-field col s12">
-								<select id="interaction-select" name="interaction-select" class="browser-default z-depth-1">
-								  <option value="" disabled selected>Choose your intended level of interaction</option>
-								  <option value="1" >Low: I will interact with few people and few things other people touch; this means you will keep interation to a minimum and do things like order groceries.</option>
-								  <option value="2">Medium: I will interact with a moderate amount of people and things other people touch; this means you will do things like use shopping carts and public doors.</option>
-								  <option value="3" id="high">High: I will interact with many people and things other people touch; this means you will do things like handling money and going out to eat frequently or you work in a high traffic environment.</option>
-								</select>
 							</div>
 						</div>
 					</div>
@@ -329,7 +329,6 @@
 				$('.sidenav').sidenav();
 				$('.dropdown-trigger').dropdown();
 				$('select').formSelect();
-				$('.tooltipped').tooltip();
 			});	
 
 			function onlyNumberKey(evt) { 
