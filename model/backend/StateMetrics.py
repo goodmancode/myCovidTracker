@@ -23,6 +23,6 @@ class StateMetrics:
 
     def get_avg_cases_per_day(self):
         return self.avg_cases_per_day
-
+        
     def predict_days_out(self, days):
         return self.predictions[:days]

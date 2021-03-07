@@ -4,6 +4,7 @@ import unittest
 import pandas as pd
 from datetime import date
 from backend import refresh_data
+from datetime import datetime, timedelta
 
 class TestRefresher(unittest.TestCase):
 
@@ -21,8 +22,9 @@ class TestRefresher(unittest.TestCase):
 
         # Set this value to yesterday's date
         # date column in dataset is an int value
-        current_date = '2021-03-01'
-        self.assertEqual(max(df['submission_date']).split('T')[0], current_date, 'Should be ' + current_date)
+        yesterday = datetime.now() - timedelta(1)
+        yesterday_str = datetime.strftime(yesterday, '%Y-%m-%d')
+        self.assertEqual(max(df['submission_date']).split('T')[0], yesterday_str, 'Should be ' + yesterday_str)
 
 if __name__ == '__main__':
     unittest.main()
