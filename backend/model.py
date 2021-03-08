@@ -140,8 +140,6 @@ def regression():
     # 30 days out
     forecast_dates = []
 
-    models_pickled = True
-
     # Only saving relevant featutes
     df = df[['submission_date', 'state', 'tot_death', 'new_death', 'tot_cases', 'new_case']]
 
@@ -194,27 +192,19 @@ def regression():
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2)
 
-        if models_pickled:
-            dir_path = os.path.dirname(os.path.realpath(__file__))
-            file_name = dir_path + '/pickle_files/' + state + '_model.pickle'
-            pickle_in = open(file_name, 'rb')
-            best_ridge = pickle.load(pickle_in)
-            pickle_in.close()
-        else:
-            # Using GridSearchCV to search for the best alpha to implement into the model
-            ridge = Ridge()
-            alphas = np.logspace(-4, 0, 50)
-            param_grid = {'alpha': alphas, 'normalize': [True, False]}
-            ridge_cv = GridSearchCV(ridge, param_grid, cv = 10)
-            ridge_cv.fit(X_train, y_train)
-            best_ridge = ridge_cv.best_estimator_
+        # Using GridSearchCV to search for the best alpha to implement into the model
+        ridge = Ridge()
+        alphas = np.logspace(-4, 0, 50)
+        param_grid = {'alpha': alphas, 'normalize': [True, False]}
+        ridge_cv = GridSearchCV(ridge, param_grid, cv = 10)
+        ridge_cv.fit(X_train, y_train)
+        best_ridge = ridge_cv.best_estimator_
 
-            # Model training and prediction
-            best_ridge.fit(X_train, y_train)
+        # Model training and prediction
+        best_ridge.fit(X_train, y_train)
 
-            # Storing model so it can be reused in the future
-            pickle_model(state, best_ridge)
-            models_pickled = True
+        # Storing model so it can be reused in the future
+        pickle_model(state, best_ridge)
 
         # Getting the score and forecast set
         score = best_ridge.score(X_test, y_test)

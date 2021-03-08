@@ -1,4 +1,4 @@
-import StateMetrics
+from State import State
 import numpy as np
 
 class RiskAssessment:
@@ -15,12 +15,15 @@ class RiskAssessment:
         self.vaccinated = vaccinated
         self.days_traveling = days_traveling
 
-    def calculate_risk(self, StateMetrics):
-        days_out = StateMetrics.days_out
-        pct_change = np.array(StateMetrics.get_percent_change())
-        forecast_pct_change = (np.array(StateMetrics.predictions[days_out]) - np.array(StateMetrics.predictions[0])) / np.array(StateMetrics.predictions[0]) * 100.0
-        avg_pct_change = sum(pct_change / len(StateMetrics.get_percent_change()))
-        
+    def calculate_risk(self, state):
+        days_out = state.metrics.days_out
+        pct_change = np.array(state.metrics.get_percent_change())
+
+        forecast_pct_change = (np.array(state.metrics.predictions[days_out]) -
+        np.array(state.metrics.predictions[0])) / np.array(state.metrics.predictions[0]) * 100.0
+
+        avg_pct_change = np.sum(pct_change) / len(pct_change)
+
         if ((avg_pct_change - forecast_pct_change) > 0):
             return 0 # less risk
         elif (avg_pct_change - forecast_pct_change < 0):
@@ -45,4 +48,3 @@ class RiskAssessment:
         if type(vaccinated) != bool:
             raise Exception("input should be a boolean")
         self.vaccinated = vaccinated
-
