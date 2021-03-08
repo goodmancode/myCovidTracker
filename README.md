@@ -116,7 +116,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - [Demonstration - backend - model](https://youtu.be/PT57Te_kbWg)
 - [Demonstration - backend - class](https://youtu.be/R0NySGDPzsE)
 - [Front end source code](https://github.com/goodmancode/myCovidTracker/tree/main/site)
-- [Back end source code](https://github.com/goodmancode/myCovidTracker/tree/main/model)
+- [Back end source code](https://github.com/goodmancode/myCovidTracker/tree/main/backend)
 
 ## Task Allocation
 - Robinson - U029, class diagrams, demonstration
