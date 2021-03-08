@@ -21,7 +21,7 @@ class RiskAssessmentTest(unittest.TestCase):
             test.set_immuno_compromised(55)
 
     def test_calculate_risk(self):
-        s = StateMetrics([100, 120], 1, 150, 0.99, 0.25, 150)
+        s = StateMetrics([100, 120], 1, 150, 0.99, [0.25], 150)
         calcRisk = RiskAssessment(20, True, True, True, 1)
         self.assertEqual(calcRisk.calculate_risk(s), 1, "Should be 1")
     
