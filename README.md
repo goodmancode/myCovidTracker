@@ -112,7 +112,9 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
 - [Dataset](https://github.com/goodmancode/myflorida-covid-tracker/tree/main/model)
 - [System Architecture](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/architecture.md)
-- [Demonstration - front end](https://youtu.be/FFdZZ5oU_NA)
+- [Demonstration - front end](https://youtu.be/v7T7F0jCbBk)
+- [Demonstration - backend - model](https://youtu.be/PT57Te_kbWg)
+- [Demonstration - backend - class](https://youtu.be/R0NySGDPzsE)
 - [Front end source code](https://github.com/goodmancode/myCovidTracker/tree/main/site)
 - [Back end source code](https://github.com/goodmancode/myCovidTracker/tree/main/model)
 
