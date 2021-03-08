@@ -1,6 +1,6 @@
 import unittest
-import State
-import StateMetrics
+from State import State
+from StateMetrics import StateMetrics
 
 class StateTest(unittest.TestCase):
     def test_get_name(self):
