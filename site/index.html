@@ -101,6 +101,7 @@
 				</div>
 				<button class="btn-small">Sign up</button>
 				</form>
+				<p class="helper-text red-text center-align"></p>
 			</div>
 		</div>
 
@@ -120,17 +121,8 @@
 					<button class="btn-small">Login</button>
 					<!-- of type button to avoid default form submission behaviour -->
 					<a href="#" class="modal-trigger white-text" data-target="modal-reset"><button class="btn-small" type ="button">Forgot Password?</button></a>
+					<p class="helper-text red-text center-align"></p>
 				</form>
-			</div>
-		</div>
-
-		<!-- alert modal invalid number entry -->
-		<div id="modal-invalid" class="modal bottom-sheet">
-			<div class="modal-content">
-				<h4>Please enter a number</h4>
-			</div>
-			<div class="modal-footer">
-				<button class="btn-small modal-close">Okay</a>
 			</div>
 		</div>
 
@@ -144,18 +136,8 @@
 						<label for="reset-email">Email</label>
 					</div>
 					<button class="btn-small">Reset Password</button>
+					<p class="helper-text red-text center-align"></p>
 				</form>
-			</div>
-		</div>
-
-		<!-- alert modal password reset email sent -->
-		<div id="modal-reset-notice" class="modal bottom-sheet">
-			<div class="modal-content">
-				<h4>Password reset email sent.</h4>
-				<p>Be sure to check your spam folder for the email.</p>	
-			</div>
-			<div class="modal-footer">
-				<button class="btn-small modal-close">Okay</a>
 			</div>
 		</div>
 
@@ -277,7 +259,8 @@
 							</div>
 							<div class="col s3">
 								<div class="input-field">
-									<input placeholder="Enter age here" id="age" type="text" onkeypress="return onlyNumberKey(event)" maxlength="3" >
+									<input class="validate" placeholder="Enter age here" id="age" type="number" onkeypress="return onlyNumberKey(event)" maxlength="3" min="1" max="150">
+									<span class="helper-text" data-error="Please enter a number from 1 to 150" data-success="">You may only enter numerical characters.</span>
 								</div>
 							</div>
 						</div>
@@ -335,7 +318,7 @@
 			// Only ASCII characters allowed on keypress are the digits 0-9
 			var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
 			if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
-				$('#modal-invalid').modal('open');
+				//$('#modal-invalid').modal('open');
 				// alert("Enter a number");
 				return false; 	  
 			}

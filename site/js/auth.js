@@ -28,7 +28,10 @@ signupForm.addEventListener('submit', (e) => {
         // close form and reset fields after submission
         M.Modal.getInstance(modal).close();
         signupForm.reset();
-    })
+        signupForm.querySelector('.helper-text').innerHTML = '';
+    }).catch(function(error) {
+        signupForm.querySelector('.helper-text').innerHTML = error.message;
+      });
 })
 
 // sign out
@@ -53,7 +56,10 @@ loginForm.addEventListener('submit', (e) => {
         // close form and reset fields after submission
         M.Modal.getInstance(modal).close();
         loginForm.reset();
-    })
+        loginForm.querySelector('.helper-text').innerHTML = '';
+    }).catch(function(error) {
+        loginForm.querySelector('.helper-text').innerHTML = error.message;
+    });
 })
 
 // password reset
@@ -71,10 +77,11 @@ resetForm.addEventListener('submit', (e) => {
         M.Modal.getInstance(modal).close();
         resetForm.reset();
         // Email sent, alert user
+        M.toast({html: 'Password Reset link sent to email'})
         $('#modal-login').modal('close');
-        $('#modal-reset-notice').modal('open');
+        resetForm.querySelector('.helper-text').innerHTML = '';
       }).catch(function(error) {
-        // An error happened.
+        resetForm.querySelector('.helper-text').innerHTML = error.message;
       });
 })
 
