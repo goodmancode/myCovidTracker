@@ -24,3 +24,24 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.FormSelect.init(elems, {});
   
   });
+
+function truncate(value) {
+    if (value.length > 3) {
+        value = value.slice(0, 3);
+    }
+    return value;
+}
+
+function onlyNumberKey(evt) { 
+    // Only ASCII characters allowed on keypress are the digits 0-9
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
+        //$('#modal-invalid').modal('open');
+        // alert("Enter a number");
+        M.toast({html: 'Please enter a number', displayLength: 1000})
+        return false; 	  
+    }
+    return true; 
+} 
+
+module.exports = truncate, onlyNumberKey

@@ -36,7 +36,7 @@
 						<a href="#" id="logout">Logout</a>
 					</li>
 					<li class="logged-out">
-						<a href="#" class="modal-trigger" data-target="modal-login">Login</a>
+						<a href="#" class="modal-trigger" data-target="modal-login" id="login">Login</a>
 					</li>
 					<li class="logged-out">
 						<a href="#" class="modal-trigger" data-target="modal-signup">Sign up</a>
@@ -118,7 +118,7 @@
 						<input type="password" id="login-password" required />
 						<label for="login-password">Password</label>
 					</div>
-					<button class="btn-small">Login</button>
+					<button class="btn-small" id='login-button'>Login</button>
 					<!-- of type button to avoid default form submission behaviour -->
 					<a href="#" class="modal-trigger white-text" data-target="modal-reset"><button class="btn-small" type ="button">Forgot Password?</button></a>
 					<p class="helper-text red-text center-align"></p>
@@ -241,6 +241,33 @@
 							<div class="col s12 center-align">
 								<h5>Risk Factors</h5>
 							</div>
+							<div class="col s4 offset-s4">
+								<div class="input-field">
+									<input class="validate" placeholder="Enter your age here" id="age" type="number" onkeypress="return onlyNumberKey(event)" min="1" max="125" oninput="this.value = truncate(this.value)">
+									<span class="helper-text" data-error="Please enter a number from 1 to 125" data-success="">You may only enter numerical characters.</span>
+								</div>
+							</div>
+							<div class="input-field col s6">
+								<select id="location-select" name="location-select" class="browser-default z-depth-1">
+								  <option value="" disabled selected>Are you immunocompromised?</option>
+								  <option value="1" title="I am immunocompromised.">Yes</option>
+								  <option value="2" title="I am not immunocompromised.">No</option>
+								</select>
+							</div>
+							<div class="input-field col s6">
+								<select id="interaction-select" name="interaction-select" class="browser-default z-depth-1">
+								  <option value="" disabled selected>Have you been vaccinated?</option>
+								  <option value="1" title="I have been vaccinated.">Yes</option>
+								  <option value="2" title="I have not been vaccinated.">No</option>
+								</select>
+							</div>
+							<div class="input-field col s6">
+								<select id="interaction-select" name="interaction-select" class="browser-default z-depth-1">
+								  <option value="" disabled selected>Have you been positively diagnosed with COVID-19 before?</option>
+								  <option value="1" title="I have been dignosed with COVID-19.">Yes</option>
+								  <option value="2" title="I have not been diagnosed with COVID-19.">No</option>
+								</select>
+							</div>
 							<div class="input-field col s6">
 								<select id="location-select" name="location-select" class="browser-default z-depth-1">
 								  <option value="" disabled selected>Choose the risk level of the places you intend to go</option>
@@ -256,12 +283,6 @@
 								  <option value="2" title="I will interact with a moderate amount of people and things other people touch; this means you will do things like use shopping carts and public doors.">Medium</option>
 								  <option value="3" id="high" title="I will interact with many people and things other people touch; this means you will do things like handling money and going out to eat frequently or you work in a high traffic environment.">High</option>
 								</select>
-							</div>
-							<div class="col s3">
-								<div class="input-field">
-									<input class="validate" placeholder="Enter age here" id="age" type="number" onkeypress="return onlyNumberKey(event)" maxlength="3" min="1" max="150">
-									<span class="helper-text" data-error="Please enter a number from 1 to 150" data-success="">You may only enter numerical characters.</span>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -313,17 +334,6 @@
 				$('.dropdown-trigger').dropdown();
 				$('select').formSelect();
 			});	
-
-			function onlyNumberKey(evt) { 
-			// Only ASCII characters allowed on keypress are the digits 0-9
-			var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
-			if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
-				//$('#modal-invalid').modal('open');
-				// alert("Enter a number");
-				return false; 	  
-			}
-			return true; 
-			} 
 		</script>
 	</main></body>
 	<footer class="page-footer teal">
