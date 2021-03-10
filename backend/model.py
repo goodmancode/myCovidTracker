@@ -7,6 +7,7 @@ from State import State
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
@@ -58,12 +59,6 @@ def create_json(state_data, dates):
 
     return
 
-def convert_dates_to_datetime(data):
-    for id, date in zip(data.index, data['submission_date']):
-        date = date.split('T')[0]
-        data.at[id, 'submission_date'] = datetime.datetime.strptime(date, '%Y-%m-%d')
-
-    return data
 
 # If missing values are detected in a column, that column's
 # value will be the value to replace missing values with
@@ -147,6 +142,11 @@ def regression():
     df['prev_day'] = df['tot_cases'] - df['new_case']
     df['PCT_change'] = (df['new_case'] / df['prev_day']) * 100.0
 
+    # Changing index to dates
+    df['submission_date'] = pd.to_datetime(df.submission_date, format = '%Y-%m-%d')
+    df.set_index('submission_date', inplace = True)
+    df.sort_index(inplace = True)
+
     for i, state in enumerate(states):
         # Getting the specified state
         chosen_state = state_dict[state]
@@ -155,11 +155,6 @@ def regression():
         # from a specific state to avoid slicing issues
         df_filtered = pd.DataFrame(df.loc[:,][df.state == chosen_state])
         df_filtered.drop(['state'], 1, inplace = True)
-
-        # Using the date as the index as a way to organize the data
-        df_filtered = convert_dates_to_datetime(df_filtered)
-        df_filtered.set_index('submission_date', drop = True, inplace = True)
-        df_filtered.sort_index(inplace = True)
 
         # Missing values are located, and replaced as most nan values are dates
         # with no cases reported
@@ -196,7 +191,7 @@ def regression():
         ridge = Ridge()
         alphas = np.logspace(-4, 0, 50)
         param_grid = {'alpha': alphas, 'normalize': [True, False]}
-        ridge_cv = GridSearchCV(ridge, param_grid, cv = 10)
+        ridge_cv = GridSearchCV(ridge, param_grid, cv = 10, scoring = 'neg_root_mean_squared_error')
         ridge_cv.fit(X_train, y_train)
         best_ridge = ridge_cv.best_estimator_
 
