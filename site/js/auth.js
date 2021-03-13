@@ -78,10 +78,50 @@ resetForm.addEventListener('submit', (e) => {
         resetForm.reset();
         // Email sent, alert user
         M.toast({html: 'Password Reset link sent to email'})
-        $('#modal-login').modal('close');
         resetForm.querySelector('.helper-text').innerHTML = '';
       }).catch(function(error) {
         resetForm.querySelector('.helper-text').innerHTML = error.message;
       });
 })
 
+// account deletion
+const deleteForm = document.querySelector('#delete-form');
+deleteForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const modal = document.querySelector('#modal-delete');
+    const user = auth.currentUser;
+
+    // store input
+    const password = deleteForm['deletion-password'].value;
+
+    // store credential from given username/password combo
+    const credential = firebase.auth.EmailAuthProvider.credential(
+        user.email, 
+        password
+    );
+
+    // reauthenticate the user
+    user.reauthenticateWithCredential(credential).then(function() {
+        // User re-authenticated.
+        M.Modal.getInstance(modal).close();
+        deleteForm.reset();
+        deleteForm.querySelector('.helper-text').innerHTML = '';
+
+        // delete the user account
+        auth.signOut();
+        user.delete().then(function() {
+            // User deleted.
+            M.toast({html: 'Account deleted'})
+            deleteForm.querySelector('.helper-text').innerHTML = '';
+        }).catch(function(error) {
+            // An error happened.
+            deleteForm.querySelector('.helper-text').innerHTML = error.message;
+        });
+
+      }).catch(function(error) {
+        // An error happened.
+        deleteForm.querySelector('.helper-text').innerHTML = error.message;
+      });
+            
+})

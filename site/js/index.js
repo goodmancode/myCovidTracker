@@ -44,4 +44,4 @@ function onlyNumberKey(evt) {
     return true; 
 } 
 
-module.exports = truncate, onlyNumberKey
+// module.exports = truncate, onlyNumberKey
