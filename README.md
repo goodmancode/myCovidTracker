@@ -120,3 +120,23 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Jacob - U008, interactive map, updates to C4 diagrams, Interface diagram
 - Sairam - U036, U029, ER diagrams
 - Steve - U031, U019, Design Document
+
+# Sprint 6
+- [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
+    - Product Backlog
+    - Sprint Backlog
+    - Requirements
+    - Effort & Priority
+    - etc.
+- [Burndown Chart](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_5/burndown_chart.png)
+- [Velocity Chart](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_5/velocity_chart.png)
+- Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
+- [System Architecture](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/architecture.md)
+- [Front end source code](https://github.com/goodmancode/myCovidTracker/tree/main/site)
+- [Back end source code](https://github.com/goodmancode/myCovidTracker/tree/main/backend)
+
+## Task Allocation
+- Robinson - U037, model demo, class diagrams
+- Jacob - U008, C4 diagrams, Interface diagram
+- Sairam - U036, U029, ER diagrams
+- Steve - U038, Design Document
