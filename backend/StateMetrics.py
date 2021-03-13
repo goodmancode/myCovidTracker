@@ -22,9 +22,8 @@ class StateMetrics:
     def get_model_accuracy(self):
         return self.model_accuracy
 
-    def avg_cases_per_day(self):
+    def get_avg_cases_per_day(self):
         return self.avg_cases_per_day
 
     def predict_days_out(self, days):
-        self.days_out = days
         return self.predictions[:days]
