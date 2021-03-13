@@ -18,7 +18,8 @@ test('test that signup cannot occur without input', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    // goes up 3 parent directories and into the relative path of the site
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#signup', elem => elem.click());
     await page.$eval('button#signup-button', elem => elem.click());
@@ -41,7 +42,7 @@ test('test that signup cannot occur with an invalid email address', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#signup', elem => elem.click());
     await page.type('input#signup-email', 'test');
@@ -66,7 +67,7 @@ test('test that signup cannot occur with an invalid password', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#signup', elem => elem.click());
     await page.type('input#signup-email', 'test@example.com');
@@ -91,7 +92,7 @@ test('test that signup cannot occur with an email that is in use', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#signup', elem => elem.click());
     await page.type('input#signup-email', 'taken@example.com');
@@ -116,7 +117,7 @@ test('test proper signup functionality and logout', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#signup', elem => elem.click());
     await page.type('input#signup-email', 'test@example.com');
@@ -144,7 +145,7 @@ test('test that login cannot occur with no input', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.$eval('button#login-button', elem => elem.click());
@@ -167,7 +168,7 @@ test('test that login cannot occur without a proper email address', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.type('input#login-email', 'test');
@@ -192,7 +193,7 @@ test('test that login cannot occur with an incorrect password', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.type('input#login-email', 'taken@example.com');
@@ -218,7 +219,7 @@ test('test proper login functionality and logout', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.type('input#login-email', 'test@example.com');
@@ -245,7 +246,7 @@ test('test that passwords cannot be reset with no input', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.$eval('button#reset-button', elem => elem.click());
@@ -266,7 +267,7 @@ test('test that passwords cannot be reset with an unregistered email address', a
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.$eval('button#reset-button', elem => elem.click());
@@ -288,7 +289,7 @@ test('test proper password reset functionality', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.$eval('button#reset-button', elem => elem.click());
@@ -310,7 +311,7 @@ test('test that accounts cannot be deleted without proper authentication', async
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.type('input#login-email', 'test@example.com');
@@ -337,7 +338,7 @@ test('test proper account deletion functionality', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080});
-    await page.goto(`file:${path.join(__dirname, '../index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#login', elem => elem.click());
     await page.type('input#login-email', 'test@example.com');
