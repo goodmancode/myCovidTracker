@@ -1,5 +1,6 @@
 const { TestScheduler } = require('jest');
 const puppeteer = require('puppeteer');
+const firebase = require('firebase-admin');
 // this provides the path of the current directory so that relative filepath handling can be done
 const path = require('path');
 const { hasUncaughtExceptionCaptureCallback } = require('process');
@@ -44,6 +45,9 @@ test('test that signup cannot occur with an invalid email address', async () =>{
     await page.type('input#signup-password', 'test12');
     await page.$eval('button#signup-button', elem => elem.click());
 
+    // checks that no user is logged in
+    expect(firebase.auth.Currentuser).toBeFalsy;
+
     await page.waitForTimeout(1000);
     await browser.close();
 })
@@ -66,6 +70,9 @@ test('test that signup cannot occur with an invalid password', async () =>{
     await page.type('input#signup-email', 'testmobile@example.com');
     await page.type('input#signup-password', 'test');
     await page.$eval('button#signup-button', elem => elem.click());
+
+    // checks that no user is logged in
+    expect(firebase.auth.Currentuser).toBeFalsy;
 
     await page.waitForTimeout(1000);
     await browser.close();
@@ -90,6 +97,9 @@ test('test that signup cannot occur with an email that is in use', async () =>{
     await page.type('input#signup-password', 'test12');
     await page.$eval('button#signup-button', elem => elem.click());
 
+    // checks that no user is logged in
+    expect(firebase.auth.Currentuser).toBeFalsy;
+
     await page.waitForTimeout(1000);
     await browser.close();
 })
@@ -112,6 +122,10 @@ test('test proper signup functionality and logout', async () =>{
     await page.type('input#signup-email', 'testmobile@example.com');
     await page.type('input#signup-password', 'test12');
     await page.$eval('button#signup-button', elem => elem.click());
+    
+    // checks that a user is logged in
+    expect(firebase.auth.Currentuser).toBeFalsy;
+    
     await page.$eval('a#logout', elem => elem.click());
 
     await page.waitForTimeout(1000);
@@ -135,6 +149,9 @@ test('test that login cannot occur with no input', async () =>{
     await page.$eval('a#loginm', elem => elem.click());
     await page.$eval('button#login-button', elem => elem.click());
 
+    // checks that no user is logged in
+    expect(firebase.auth.Currentuser).toBeFalsy;
+
     await page.waitForTimeout(1000);
     await browser.close();
 })
@@ -157,6 +174,9 @@ test('test that login cannot occur without a proper email address', async () =>{
     await page.type('input#login-email', 'test');
     await page.type('input#login-password', 'test12');
     await page.$eval('button#login-button', elem => elem.click());
+
+    // checks that no user is logged in
+    expect(firebase.auth.Currentuser).toBeFalsy;
 
     await page.waitForTimeout(1000);
     await browser.close();
@@ -182,6 +202,9 @@ test('test that login cannot occur with an incorrect password', async () =>{
     await page.$eval('button#login-button', elem => elem.click());
     await page.$eval('a#logout', elem => elem.click());
 
+    // checks that no user is logged in
+    expect(firebase.auth.Currentuser).toBeFalsy;
+
     await page.waitForTimeout(1000);
     await browser.close();
 })
@@ -204,6 +227,10 @@ test('test proper login functionality and logout', async () =>{
     await page.type('input#login-email', 'testmobile@example.com');
     await page.type('input#login-password', 'test12');
     await page.$eval('button#login-button', elem => elem.click());
+
+    // checks that a user is logged in
+    expect(firebase.auth.Currentuser).toBeTruthy;
+    
     await page.$eval('a#logout', elem => elem.click());
 
     await page.waitForTimeout(1000);
