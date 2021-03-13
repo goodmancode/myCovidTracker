@@ -132,11 +132,13 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - [Velocity Chart](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_5/velocity_chart.png)
 - Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
 - [System Architecture](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/architecture.md)
-- [Front end source code](https://github.com/goodmancode/myCovidTracker/tree/main/site)
-- [Back end source code](https://github.com/goodmancode/myCovidTracker/tree/main/backend)
+- [Frontend source code](https://github.com/goodmancode/myCovidTracker/tree/main/site)
+- [Backend source code](https://github.com/goodmancode/myCovidTracker/tree/main/backend)
+- [Frontend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/frontend_tests)
+- [Backend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/backend_tests)
 
 ## Task Allocation
 - Robinson - U037, model demo, class diagrams
 - Jacob - U008, C4 diagrams, Interface diagram
-- Sairam - U036, U029, ER diagrams
+- Sairam - Research, CDC correspondence ER diagrams
 - Steve - U038, Design Document
