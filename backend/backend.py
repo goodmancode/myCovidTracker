@@ -2,6 +2,8 @@ from os import path
 import schedule, time, requests
 from urllib.error import HTTPError
 
+from model import regression
+
 import numpy as np
 import pandas as pd
 
