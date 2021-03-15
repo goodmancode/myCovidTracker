@@ -176,56 +176,56 @@
 							<div class="input-field col s6 offset-s3">
 								<select id="state-select" name="state-select" class="browser-default z-depth-1">
 									<option value="" disabled selected>Choose a state</option>
-									<option value="alabama">Alabama</option>
-									<option value="alaska">Alaska</option>
-									<option value="arizona">Arizona</option>
-									<option value="arkansas">Arkansas</option>
-									<option value="california">California</option>
-									<option value="colorado">Colorado</option>
-									<option value="connecticut">Connecticut</option>
-									<option value="delaware">Delaware</option>
-									<option value="florida">Florida</option>
-									<option value="georgia">Georgia</option>
-									<option value="hawaii">Hawaii</option>
-									<option value="idaho">Idaho</option>
-									<option value="illinois">Illinois</option>
-									<option value="indiana">Indiana</option>
-									<option value="iowa">Iowa</option>
-									<option value="kansas">Kansas</option>
-									<option value="kentucky">Kentucky</option>
-									<option value="louisiana">Louisiana</option>
-									<option value="maine">Maine</option>
-									<option value="maryland">Maryland</option>
-									<option value="massachusetts">Massachusetts</option>
-									<option value="michigan">Michigan</option>
-									<option value="minnesota">Minnesota</option>
-									<option value="mississippi">Mississippi</option>
-									<option value="missouri">Missouri</option>
-									<option value="montana">Montana</option>
-									<option value="nebraska">Nebraska</option>
-									<option value="nevada">Nevada</option>
-									<option value="new_hampshire">New Hampshire</option>
-									<option value="new_jersey">New Jersey</option>
-									<option value="new_mexico">New Mexico</option>
-									<option value="new_york">New York</option>
-									<option value="north_carolina">North Carolina</option>
-									<option value="north_dakota">North Dakota</option>
-									<option value="ohio">Ohio</option>
-									<option value="oklahoma">Oklahoma</option>
-									<option value="oregon">Oregon</option>
-									<option value="pennsylvania">Pennsylvania</option>
-									<option value="rhode_island">Rhode Island</option>
-									<option value="south_carolina">South Carolina</option>
-									<option value="south_dakota">South Dakota</option>
-									<option value="tennessee">Tennessee</option>
-									<option value="texas">Texas</option>
-									<option value="utah">Utah</option>
-									<option value="vermont">Vermont</option>
-									<option value="virginia">Virginia</option>
-									<option value="washington">Washington</option>
-									<option value="west_virginia">West Virginia</option>
-									<option value="wisconsin">Wisconsin</option>
-									<option value="wyoming">Wyoming</option>
+									<option value="Alabama">Alabama</option>
+									<option value="Alaska">Alaska</option>
+									<option value="Arizona">Arizona</option>
+									<option value="Arkansas">Arkansas</option>
+									<option value="California">California</option>
+									<option value="Colorado">Colorado</option>
+									<option value="Connecticut">Connecticut</option>
+									<option value="Delaware">Delaware</option>
+									<option value="Florida">Florida</option>
+									<option value="Georgia">Georgia</option>
+									<option value="Hawaii">Hawaii</option>
+									<option value="Idaho">Idaho</option>
+									<option value="Illinois">Illinois</option>
+									<option value="Indiana">Indiana</option>
+									<option value="Iowa">Iowa</option>
+									<option value="Kansas">Kansas</option>
+									<option value="Kentucky">Kentucky</option>
+									<option value="Louisiana">Louisiana</option>
+									<option value="Maine">Maine</option>
+									<option value="Maryland">Maryland</option>
+									<option value="Massachusetts">Massachusetts</option>
+									<option value="Michigan">Michigan</option>
+									<option value="Minnesota">Minnesota</option>
+									<option value="Mississippi">Mississippi</option>
+									<option value="Missouri">Missouri</option>
+									<option value="Montana">Montana</option>
+									<option value="Nebraska">Nebraska</option>
+									<option value="Nevada">Nevada</option>
+									<option value="New Hampshire">New Hampshire</option>
+									<option value="New Jersey">New Jersey</option>
+									<option value="New Mexico">New Mexico</option>
+									<option value="New York">New York</option>
+									<option value="North Carolina">North Carolina</option>
+									<option value="North Dakota">North Dakota</option>
+									<option value="Ohio">Ohio</option>
+									<option value="Oklahoma">Oklahoma</option>
+									<option value="Oregon">Oregon</option>
+									<option value="Pennsylvania">Pennsylvania</option>
+									<option value="Rhode Island">Rhode Island</option>
+									<option value="South Carolina">South Carolina</option>
+									<option value="South Dakota">South Dakota</option>
+									<option value="Tennessee">Tennessee</option>
+									<option value="Texas">Texas</option>
+									<option value="Utah">Utah</option>
+									<option value="Vermont">Vermont</option>
+									<option value="Virginia">Virginia</option>
+									<option value="Washington">Washington</option>
+									<option value="West Virginia">West Virginia</option>
+									<option value="Wisconsin">Wisconsin</option>
+									<option value="Wyoming">Wyoming</option>
 								</select>
 							</div>
 						</div>
@@ -241,7 +241,42 @@
 							<canvas id="data-chart"></canvas>
 						</div>
 						<div class="row">
-							<p class="center">Sliders, descriptions, etc...</p>
+							<div class="col s6">
+								<p>Start Month/Year</p>
+								<div class="input-field col s6">
+									<select id="start-month" class="browser-default z-depth-1">
+										<option value="" disabled>Month</option>
+										<option value="01">January</option>
+										<option value="02" selected>February</option>
+										<option value="03">March</option>
+										<option value="04">April</option>
+										<option value="05">May</option>
+										<option value="06">June</option>
+										<option value="07">July</option>
+										<option value="08">August</option>
+										<option value="09">September</option>
+										<option value="10">October</option>
+										<option value="11">November</option>
+										<option value="12">December</option>
+									</select>
+								</div>
+								<div class="input-field col s6">
+									<select id="start-year" class="browser-default z-depth-1">
+										<option value="" disabled>Year</option>
+										<option value="2021" selected>2021</option>
+										<option value="2020">2020</option>
+										<option value="2019">2019</option>
+									</select>
+								</div>
+							</div>
+							<div class="col s6">
+								<p>Days (from today) to Predict</p>
+								<form action="#">
+									<p class="range-field">
+										<input type="range" id="prediction-days" min="0" max="30" value="7"/>
+									</p>
+								</form>
+							</div>
 						</div>
 						
 					</div>
@@ -335,8 +370,12 @@
 		<script src="js/us-map-svg.js"></script>
 		<script src="js/interactive-map.js"></script>
 
-		<!-- Chart.js script -->
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<!-- Chart.js scripts -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.js"></script>
+		<script src="json/forecast_data.json"></script>
+		<script src="js/forecast_data.js"></script>
+		<script src="js/chartDataConverter.js"></script>
+		<script src="js/state_list.js"></script>
 		<script src="js/data-chart.js"></script>
 
 		<script>
@@ -344,6 +383,9 @@
 				$('.sidenav').sidenav();
 				$('.dropdown-trigger').dropdown();
 				$('select').formSelect();
+				$('.datepicker').datepicker({
+					format: 'yyyy-mm-dd'
+				});
 			});	
 		</script>
 	</main></body>

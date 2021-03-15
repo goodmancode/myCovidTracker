@@ -58,8 +58,7 @@ window.onload = function () {
               var myKey = keys[i];
             }
           }
-          document.getElementById("state-select").value = myKey;
-          console.log(st);
+          $('#state-select').val(myKey).change();
           prevState = curState;
           curState = st;
           prevState.animate({fill: "#d3d3d3"}, 500);
@@ -70,10 +69,12 @@ window.onload = function () {
 
         // Changes the highlighted state when user changes the dropdown selection
         document.getElementById("state-select").onchange = function () {
-          prevState = curState;
+          if (curState != undefined) {
+            prevState = curState;
+            prevState.animate({fill: "#d3d3d3"}, 500);
+            prevState.toFront();
+          }
           curState = usRaphael[document.getElementById("state-select").value];
-          prevState.animate({fill: "#d3d3d3"}, 500);
-          prevState.toFront();
           curState.animate({fill: curState.color}, 500);
           curState.toFront();
         };
