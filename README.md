@@ -136,6 +136,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - [Backend source code](https://github.com/goodmancode/myCovidTracker/tree/main/backend)
 - [Frontend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/frontend_tests)
 - [Backend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/backend_tests)
+- [Demonstration - Frontend - Account deletion/input fields](https://youtu.be/EmkhWX8ueww)
 - [Demonstration - Backend](https://youtu.be/5sejbCiAU8Q)
 
 ## Task Allocation
