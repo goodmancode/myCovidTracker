@@ -5,7 +5,6 @@ const firebase = require('firebase-admin');
 const path = require('path');
 const { hasUncaughtExceptionCaptureCallback } = require('process');
 const { expect } = require('@jest/globals');
-const signupForm = document.querySelector('#signup-form');
 
 // U024
 test('test that signup cannot occur without input', async () =>{

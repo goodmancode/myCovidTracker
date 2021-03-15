@@ -1,8 +1,11 @@
 let intro = document.querySelector('.intro');
 let logo = document.querySelector('.logo-header');
 let logoSpan = document.querySelectorAll('.logo');
+var button = document.getElementById('menu-button');
 
 window.addEventListener('DOMContentLoaded', ()=>{
+
+	button.style.display ="none";
 
 	setTimeout(() => {
 
@@ -25,5 +28,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
 			setTimeout(() => {
 					intro.style.top = '-100vh';
 			}, 1000)
+
+			setTimeout(() => {
+					button.style.display ="block";
+			}, 1650)
 	})
+
 })

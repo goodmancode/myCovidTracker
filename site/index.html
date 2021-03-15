@@ -26,7 +26,7 @@
 		<nav>
 			<div class="nav-wrapper teal">
 				<!-- sidenav trigger -->
-				<a href="#" class="sidenav-trigger" data-target="mobile-links" id="sidemenu"><i class="material-icons">menu</i></a>
+				<a href="#" class="sidenav-trigger" data-target="mobile-links" id="sidemenu"><i class="material-icons" id="menu-button">menu</i></a>
 				<a href="#" class="brand-logo center">My Covid Tracker</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li class="logged-in">
@@ -121,7 +121,7 @@
 					<button class="btn-small" id='login-button'>Login</button>
 					<!-- of type button to avoid default form submission behaviour -->
 					<a href="#" class="modal-trigger white-text" data-target="modal-reset"><button class="btn-small" type ="button" id="reset-button" onclick="$('#modal-login').modal('close');">Forgot Password?</button></a>
-					<p class="helper-text red-text center-align"></p>
+					<p class="helper-text red-text center-align" id="login-error"></p>
 				</form>
 			</div>
 		</div>
@@ -136,7 +136,7 @@
 						<label for="reset-email">Email</label>
 					</div>
 					<button class="btn-small" id="reset-confirm">Reset Password</button>
-					<p class="helper-text red-text center-align"></p>
+					<p class="helper-text red-text center-align" id="reset-error"></p>
 				</form>
 			</div>
 		</div>
