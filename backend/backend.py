@@ -89,9 +89,10 @@ def refresh_data():
     return
 
 if __name__ == '__main__':
-    schedule.every().day.at(datetime.today()).do(refresh_data)
+    schedule.every().day.at('12:05').do(refresh_data)
+    schedule.every().day.at('12:00').do(api_call)
 
-    schedule.every().day.at('19:30').do(api_call)
+    schedule.every(5).seconds.do(refresh_data)
     schedule.every(1).seconds.do(api_call)
 
     while True:

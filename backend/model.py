@@ -43,29 +43,6 @@ def create_state_dict(states, state_acronyms):
 
     return state_dict
 
-# Create json file for front end to use
-def create_json(state_data, dates):
-    json_file = []
-
-    for i, state in enumerate(state_data):
-        state_info = {}
-        data = []
-        state_info['state'] = state.name
-
-        for j in range(len(dates[i])):
-            data.append({'date': str(dates[i][j]), 'value': state.metrics.predictions[j]})
-
-        state_info['data'] = data
-        json_file.append(state_info)
-
-    # Dumping data onto new json file
-    with open('forecast_data.json', 'w') as f:
-        json.dump(json_file, f, indent = 4, sort_keys = False)
-        f.close()
-
-    return
-
-
 # If missing values are detected in a column, that column's
 # value will be the value to replace missing values with
 def check_missing_values(data):
@@ -109,17 +86,18 @@ def set_initial_zeroes(data, col_missing_vals, indices):
     return data
 
 def regression(days_since_last_retrain):
-    response = requests.get(url)
-
-    if (response.status_code == 200):
-        df = pd.read_csv(url + limit)
-        dir_path = os.path.dirname(os.path.realpath(__file__)) + '/dataset.csv'
-        df.to_csv(dir_path)
-
     # seconds per day
     one_day = 86400
 
+    pred_column = 'tot_cases' # target
+
+    # How many days in the future to predict out
+    pred_out = 30
+
     time_to_retrain = (days_since_last_retrain == 14)
+
+    # Path to pickle_files
+    dir_path = os.path.dirname(os.path.realpath(__file__)) + '/pickle_files/'
 
     # Dataset should be stored locally only if the request was successful
     df = pd.read_csv('dataset.csv')
@@ -156,7 +134,7 @@ def regression(days_since_last_retrain):
         chosen_state = state_dict[state]
 
         # Creating a new dataframe to only hold data
-        # from a specific state to avoid slicing issues
+        # from the current state to avoid slicing issues
         df_filtered = pd.DataFrame(df.loc[:,][df.state == chosen_state])
 
         df_filtered.drop(['state'], 1, inplace = True)
@@ -167,11 +145,7 @@ def regression(days_since_last_retrain):
         indices = find_first_non_nan(df_filtered, col_missing_vals)
         df_filtered = set_initial_zeroes(df_filtered, col_missing_vals, indices)
 
-        # How many days in the future to predict out
-        pred_out = 30
-
         # Creating the label column with pred_out rows to hold truth values
-        pred_column = 'tot_cases' # target
         df_filtered['label'] = df_filtered[pred_column]
 
         df_filtered = handle_inf_values(df_filtered) # Final cleanup
@@ -193,13 +167,13 @@ def regression(days_since_last_retrain):
 
         X_train, X_val, y_train, y_val = train_test_split(X_split, y_split, test_size = 0.2)
 
-        # Path to pickle_file
-        dir_path = os.path.dirname(os.path.realpath(__file__)) + '/pickle_files/'
+        # Location of state pickle file
         pickle_file = dir_path + state + '_model.pickle'
 
         # Will retrain model after 14 days have passed or the pickle file doesn't exist
         if time_to_retrain or not os.path.exists(pickle_file):
             # Using GridSearchCV to search for the best alpha to implement into the model
+            print('Retraining ' + state + ' model...')
             ridge = Ridge()
             alphas = np.logspace(-4, 0, 50)
             param_grid = {'alpha': alphas, 'normalize': [True, False]}
@@ -213,6 +187,7 @@ def regression(days_since_last_retrain):
             # Storing model so it can be reused in the future
             pickle_model(state, best_ridge)
         else:
+            print('Loading model from ' + pickle_file + '...')
             pickle_in = open(pickle_file, 'rb')
             best_ridge = pickle.load(pickle_in)
 
@@ -244,7 +219,7 @@ def regression(days_since_last_retrain):
         # List of dates for specified state
         dates = []
 
-        # Setting up data for the forecast
+        # Setting up dates for the forecast
         for j in forecast_set:
             next_date = datetime.datetime.fromtimestamp(next_unix)
             dates.append(next_date)
@@ -259,6 +234,7 @@ def regression(days_since_last_retrain):
         all_metrics.append(StateMetrics(forecast_set, avg_cases_per_day, score, daily_pct_change))
         forecast_dates.append(dates)
         print(state + ' predictions complete...')
+        print()
 
 
     state_objects = []
