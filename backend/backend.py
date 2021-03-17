@@ -2,7 +2,7 @@ import json, schedule, os, requests, time
 from urllib.error import HTTPError
 
 from datetime import datetime, timedelta
-
+from firebase_admin import credentials, initialize_app, storage
 from get_retrain_days import get_retrain_time, post_new_retrain_time
 from model import regression
 from State import State
@@ -11,6 +11,16 @@ from StateMetrics import StateMetrics
 import numpy as np
 import pandas as pd
 
+def send_to_database(filename):
+    cred = credentials.Certificate('service.json')
+    initialize_app(cred, {'storageBucket': 'mycovidtracker-5e186.appspot.com'})
+
+    bucket = storage.bucket()
+    blob = bucket.blob(filename)
+    blob.upload_from_filename(filename)
+    blob.make_public()
+
+    return
 
 def create_json(state_data, dates):
     json_file = []
@@ -27,9 +37,11 @@ def create_json(state_data, dates):
         json_file.append(state_info)
 
     # Dumping data onto new json file
-    with open('forecast_data.json', 'w') as f:
+    with open('forecast_data2.json', 'w') as f:
         json.dump(json_file, f, indent = 4, sort_keys = False)
         f.close()
+
+    send_to_database('forecast_data2.json')
 
     return
 
@@ -86,15 +98,16 @@ def refresh_data():
     # JSON is created for front end use
     create_json(state_data, forecast_dates)
 
+
     return
 
+
 if __name__ == '__main__':
-    schedule.every().day.at('12:05').do(refresh_data)
-    schedule.every().day.at('12:00').do(api_call)
+    api_call()
+    refresh_data()
 
-    schedule.every(5).seconds.do(refresh_data)
-    schedule.every(1).seconds.do(api_call)
-
+    '''
     while True:
         schedule.run_pending()
         time.sleep(1)
+        '''
