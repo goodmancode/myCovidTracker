@@ -4,8 +4,14 @@ const loggedInLinks = document.querySelectorAll('.logged-in');
 // hide/show UI elements for different login states
 const setupUI = (user) => {
     if (user) {
+        db.collection('users').doc(user.uid).get().then(doc => {
+            details.innerHTML = `
+              <div>${doc.data().email}</div>
+            `;
+          });
+
         loggedInLinks.forEach(item => item.style.display = 'block');
-        loggedOutLinks.forEach(item => item.style.display = 'none');
+        loggedOutLinks.forEach(item => item.style.display = 'none');        
     } else {
         loggedInLinks.forEach(item => item.style.display = 'none');
         loggedOutLinks.forEach(item => item.style.display = 'block');
@@ -43,5 +49,3 @@ function onlyNumberKey(evt) {
     }
     return true; 
 } 
-
-// module.exports = truncate, onlyNumberKey

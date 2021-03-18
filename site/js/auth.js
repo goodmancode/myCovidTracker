@@ -23,7 +23,15 @@ signupForm.addEventListener('submit', (e) => {
 
     // ship to Firebase Auth
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        console.log(cred.user)
+        const credential = cred;
+        // add a document to the users collection/database for the newly created user
+        // the document name is assigned the user's user id and rules are set 
+        // within the database to prevent other users from tampering with the doc
+        return db.collection('users').doc(cred.user.uid).set({
+            email: signupForm['signup-email'].value
+        });
+    }).then(() => {
+        // console.log(cred.user)
         const modal = document.querySelector('#modal-signup');
         // close form and reset fields after submission
         M.Modal.getInstance(modal).close();
@@ -108,12 +116,15 @@ deleteForm.addEventListener('submit', (e) => {
         deleteForm.reset();
         deleteForm.querySelector('.helper-text').innerHTML = '';
 
-        // delete the user account
-        auth.signOut();
-        user.delete().then(function() {
-            // User deleted.
-            M.toast({html: 'Account deleted'})
-            deleteForm.querySelector('.helper-text').innerHTML = '';
+        // delete the user's data from the users collection
+        db.collection('users').doc(user.uid).delete().then(() => {
+                // delete the user account
+                auth.signOut();
+                user.delete().then(function() {
+                // User deleted.
+                M.toast({html: 'Account deleted'})
+                deleteForm.querySelector('.helper-text').innerHTML = '';
+            })
         }).catch(function(error) {
             // An error happened.
             deleteForm.querySelector('.helper-text').innerHTML = error.message;
