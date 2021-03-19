@@ -11,7 +11,7 @@ from StateMetrics import StateMetrics
 import numpy as np
 import pandas as pd
 
-def send_to_database(filename):
+def send_forecast_data_to_storage(filename):
     cred = credentials.Certificate('service.json')
     initialize_app(cred, {'storageBucket': 'mycovidtracker-5e186.appspot.com'})
 
@@ -37,11 +37,11 @@ def create_json(state_data, dates):
         json_file.append(state_info)
 
     # Dumping data onto new json file
-    with open('forecast_data2.json', 'w') as f:
+    with open('forecast_data.json', 'w') as f:
         json.dump(json_file, f, indent = 4, sort_keys = False)
         f.close()
 
-    send_to_database('forecast_data2.json')
+    send_forecast_data_to_storage('forecast_data.json')
 
     return
 
