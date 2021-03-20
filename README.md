@@ -1,7 +1,7 @@
 # my-covid-tracker
 
 # Vision Statement
-Our product will be for any resident or visitor of the United States (US) who wishes to gain knowledge on the risk of Covid-19 contraction by traveling to any state in the US. The product will help users assess the risk of traveling based on predictions that the product makes. The product's name is the myUS Covid-19 Tracker and would be available as a basic web application. This application will give the user the ability to enter conditions that the user will be traveling in. For example, the user can indicate how much they will be exposed, or how many people they may interact with. Data provided by the Center for Disease Control (CDC) will be used to train a model that can predict Covid-19 trends in a given county will be used to create a risk assessment for the county that the user wants to travel to. Unlike services like Google and CDC tracking maps, this will be specific to the United States and will use Machine Learning algorithms to actually give the user an honest risk assessment as opposed to raw data and basic aggregation only. Our product would offer the ability to see up to two months in advance.
+Our product will be for any resident or visitor of the United States (US) who wishes to gain knowledge on the risk of Covid-19 contraction by traveling to any state in the US. The product will help users assess the risk of traveling based on predictions that the product makes. The product's name is the myUS Covid-19 Tracker and would be available as a basic web application. This application will give the user the ability to enter conditions that the user will be traveling in. For example, the user can indicate how much they will be exposed, or how many people they may interact with. Data provided by the Center for Disease Control (CDC) will be used to train a model that can predict Covid-19 trends in a given county will be used to create a risk assessment for the county that the user wants to travel to. Unlike services like Google and CDC tracking maps, this will be specific to the United States and will use Machine Learning algorithms to actually give the user an honest risk assessment as opposed to raw data and basic aggregation only. Our product would offer the ability to see up to one month in advance.
 
 # Source for Dataset
 - [Dataset](https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36)
@@ -145,3 +145,26 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Jacob - U008, C4 diagrams, Interface diagram
 - Sairam - Research, CDC correspondence ER diagrams
 - Steve - U038, Design Document
+
+# Sprint 7
+- [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
+    - Product Backlog
+    - Sprint Backlog
+    - Requirements
+    - Effort & Priority
+    - etc.
+- [Burndown Chart](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_6/burndown_chart.png)
+- [Velocity Chart](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_6/velocity_chart.png)
+- Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
+- [System Architecture](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/architecture.md)
+- [Frontend source code](https://github.com/goodmancode/myCovidTracker/tree/main/site)
+- [Backend source code](https://github.com/goodmancode/myCovidTracker/tree/main/backend)
+- [Frontend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/frontend_tests)
+- [Backend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/backend_tests)
+
+
+## Task Allocation
+- Robinson - Model hyperparameter tuning, VPS setup class diagrams
+- Jacob - U023, U039, C4 diagrams, Interface diagram
+- Sairam - U009, ER diagrams
+- Steve - U017, Database integration, Design Document
