@@ -15,10 +15,36 @@ The scoring method used to evaluate the model was Mean Squared error as the mode
 
 ## Normalization
 The final model will be using Ridge regression with a best fit alpha and *normalize* equal to *true*. This is because the regularization parameter penalizes based on the magnitude of the x values. If every value is between 0 and 1, it makes it easier to penalize these larger values. 
-![FL_normalize.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/FL_normalize.png) ![CA_normalize.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/CA_normalize.png)  ![MI_normalize.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/MI_normalize.png)
+
+### Florida Results
+![FL_normalize.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/FL_normalize.png) 
+
+### California Results
+![CA_normalize.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/CA_normalize.png)  
+
+### Michigan Results
+![MI_normalize.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/MI_normalize.png)
 
 ## MinMaxScaler
 Using the MinMaxScaler yielded distributions a bit worse than the normalized model but had less probability of smaller error values.
 
+### Florida Results
+![MI_MinMaxScaler.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/FL_MinMaxScaler.png)
+
+### California Results
+![MI_MinMaxScaler.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/CA_MinMaxScaler.png)
+
+### Michigan Results
+![MI_MinMaxScaler.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/MI_MinMaxScaler.png)
+
 ## StandardScaler
 The old way of doing things by using the standard scaler yielded the worst distributions because the data **does not** follow a normal curve and does not need to based on the nature of it being time series data. 
+
+### Florida Results
+![FL_old_model.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/FL_old_model.png) 
+
+### California Results
+![CA_old_model.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/CA_old_model.png)  
+
+### Michigan Results
+![MI_old_model.png](https://github.com/goodmancode/myCovidTracker/blob/main/backend/distributions/MI_old_model.png)
