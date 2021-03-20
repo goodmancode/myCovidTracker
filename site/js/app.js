@@ -1,12 +1,8 @@
 let intro = document.querySelector('.intro');
 let logo = document.querySelector('.logo-header');
 let logoSpan = document.querySelectorAll('.logo');
-var button = document.getElementById('menu-button');
 
 window.addEventListener('DOMContentLoaded', ()=>{
-
-	button.style.display ="none";
-
 	setTimeout(() => {
 
 			logoSpan.forEach((span, idx) => {
@@ -29,9 +25,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
 					intro.style.top = '-100vh';
 			}, 1000)
 
-			setTimeout(() => {
-					button.style.display ="block";
-			}, 1650)
+			// setTimeout(() => {
+			// }, 1200)
 	})
 
 })

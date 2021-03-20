@@ -49,3 +49,17 @@ function onlyNumberKey(evt) {
     }
     return true; 
 } 
+
+function callPython(email) {
+    console.log(email);
+    $.ajax({
+        type: "POST",
+        url: "submit.py",
+        data: { param: email}
+    }).done(function( o ) {
+        // do something
+        
+    });
+
+  return;
+}
