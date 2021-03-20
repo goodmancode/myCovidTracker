@@ -1,13 +1,14 @@
 import pandas as pd
 import numpy as np
 import datetime, json, math, os, pickle, requests, time
+import seaborn as sns
 
 from get_retrain_days import get_retrain_time, post_new_retrain_time
 from StateMetrics import StateMetrics
 from State import State
 
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import Ridge, Lasso, LinearRegression, ElasticNet
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.pipeline import make_pipeline
@@ -23,7 +24,7 @@ states = ['Alaska','Alabama','Arkansas', 'Arizona','California','Colorado',
   'North Carolina','North Dakota','Nebraska','New Hampshire','New Jersey','New Mexico',
   'Nevada','New York','Ohio','Oklahoma','Oregon','Pennsylvania',
   'Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah',
-  'Virginia','Vermont','Washington','Wisconsin','West Virginia']
+  'Virginia','Vermont','Washington','Wisconsin','West Virginia', 'Wyoming']
 
 def pickle_model(state_name, model):
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -71,18 +72,14 @@ def find_first_non_nan(data, col_missing_values):
     return indices
 
 def handle_inf_values(data):
-    for column in data.columns:
-        data.loc[data[column] == np.inf] = 0
+    data.replace([np.inf, -np.inf], 1.0, inplace = True)
 
     return data
 
 # Data passes any day with no cases recorded as NaN values
 # Those specific dates are filled with zeroes
 def set_initial_zeroes(data, col_missing_vals, indices):
-    for col in col_missing_vals:
-        last_non_nan = indices[col]
-        data.fillna(value = 0, limit = last_non_nan, inplace = True)
-
+    data.replace([np.nan], 0, limit = find_first_non_nan(data, col_missing_vals), inplace = True)
     return data
 
 def regression(days_since_last_retrain):
@@ -120,13 +117,10 @@ def regression(days_since_last_retrain):
     # Only saving relevant featutes
     df = df[['submission_date', 'state', 'tot_death', 'new_death', 'tot_cases', 'new_case']]
 
-    # Adding new features to assist with prediction
-    df['prev_day'] = df['tot_cases'] - df['new_case']
-    df['PCT_change'] = (df['new_case'] / df['prev_day']) * 100.0
 
     # Changing index to dates as datetime objects
     df['submission_date'] = pd.to_datetime(df.submission_date, format = '%Y-%m-%d')
-    df.set_index('submission_date', inplace = True)
+    df.set_index('submission_date', drop = True, inplace = True)
     df.sort_index(inplace = True)
 
     for i, state in enumerate(states):
@@ -136,14 +130,19 @@ def regression(days_since_last_retrain):
         # Creating a new dataframe to only hold data
         # from the current state to avoid slicing issues
         df_filtered = pd.DataFrame(df.loc[:,][df.state == chosen_state])
-
         df_filtered.drop(['state'], 1, inplace = True)
+
+        # Adding new features to assist with prediction
+        df_filtered['prev_day'] = df_filtered['tot_cases'] - df_filtered['new_case']
+        df_filtered['PCT_change'] = (df_filtered['new_case'] / df_filtered['prev_day']) * 100.0
+        df_filtered['AVG_cases'] = df_filtered['tot_cases'] // len(df_filtered)
 
         # Missing values are located, and replaced as most nan values are dates
         # with no cases reported
         col_missing_vals = check_missing_values(df_filtered)
         indices = find_first_non_nan(df_filtered, col_missing_vals)
         df_filtered = set_initial_zeroes(df_filtered, col_missing_vals, indices)
+
 
         # Creating the label column with pred_out rows to hold truth values
         df_filtered['label'] = df_filtered[pred_column]
@@ -152,18 +151,19 @@ def regression(days_since_last_retrain):
 
         X = np.array(df_filtered.drop('label', 1).values)
 
-        # Normalizing data as data is all on same scale
-        X = StandardScaler().fit_transform(X)
-
         # Using last 30 values to predict 30 days into the future
         X_new = X[-pred_out:]
 
+        # Creating label data
         df_filtered.dropna(inplace = True)
         y = np.array(df_filtered['label'].values)
 
-        # Only using data up to last 60 entries for training and validation
-        X_split = X[:-2 * pred_out]
-        y_split = y[pred_out:-pred_out]
+        # Only using data up to last 30 entries for training and validation
+        X_split = X[:-1 * pred_out]
+        y_split = y[pred_out // 2: -pred_out // 2]
+
+        # Creating a pipeline for the model
+        pipe = make_pipeline(Ridge())
 
         X_train, X_val, y_train, y_val = train_test_split(X_split, y_split, test_size = 0.2)
 
@@ -172,35 +172,29 @@ def regression(days_since_last_retrain):
 
         # Will retrain model after 14 days have passed or the pickle file doesn't exist
         if time_to_retrain or not os.path.exists(pickle_file):
-            # Using GridSearchCV to search for the best alpha to implement into the model
+            # Using GridSearchCV to search for the best alpha and normalization office
+            # to implement into the model
             print('Retraining ' + state + ' model...')
-            ridge = Ridge()
             alphas = np.logspace(-4, 0, 50)
-            param_grid = {'alpha': alphas, 'normalize': [True, False]}
-            ridge_cv = GridSearchCV(ridge, param_grid, cv = 10, scoring = 'neg_root_mean_squared_error')
-            ridge_cv.fit(X_train, y_train)
-            best_ridge = ridge_cv.best_estimator_
 
-            # Model training
-            best_ridge.fit(X_train, y_train)
+            # Using grid search to find the best params
+            param_grid = {'ridge__alpha': alphas, 'ridge__normalize': [True]}
+            ridge_cv = GridSearchCV(pipe, param_grid = param_grid, cv = 10)
+            ridge_cv.fit(X_train, y_train)
+            pipe = ridge_cv.best_estimator_
 
             # Storing model so it can be reused in the future
-            pickle_model(state, best_ridge)
+            pickle_model(state, pipe)
         else:
             print('Loading model from ' + pickle_file + '...')
             pickle_in = open(pickle_file, 'rb')
             best_ridge = pickle.load(pickle_in)
 
         # Getting the score and forecast set
-        score = best_ridge.score(X_val, y_val)
-
-        # Testing on last thirty days of data
-        X_pred_prev = X[-2 * pred_out:-pred_out]
-
-        y_pred_prev = best_ridge.predict(X_pred_prev)
+        score = pipe.score(X_val, y_val)
 
         # Making a prediction 30 days into the future
-        forecast_set = best_ridge.predict(X_new)
+        forecast_set = pipe.predict(X_new)
 
         df_filtered['Forecast'] = np.nan # Forecast Column
 
@@ -208,13 +202,6 @@ def regression(days_since_last_retrain):
         last_date = df_filtered.iloc[-1].name
         last_unix = last_date.timestamp()
         next_unix = last_unix + (2 * one_day)
-
-        # Setting Forecast values for previous 30 days
-        prev_thirty_days = len(y_pred_prev)
-        for j, y_pred in enumerate(y_pred_prev):
-            prev_unix = last_unix - (one_day * (prev_thirty_days - j))
-            prev_date = datetime.datetime.fromtimestamp(prev_unix)
-            df_filtered.at[prev_date, 'Forecast'] = y_pred
 
         # List of dates for specified state
         dates = []

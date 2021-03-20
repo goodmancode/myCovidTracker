@@ -11,7 +11,7 @@ from StateMetrics import StateMetrics
 import numpy as np
 import pandas as pd
 
-def send_forecast_data_to_storage(filename):
+def send_to_database(filename):
     cred = credentials.Certificate('service.json')
     initialize_app(cred, {'storageBucket': 'mycovidtracker-5e186.appspot.com'})
 
@@ -41,7 +41,7 @@ def create_json(state_data, dates):
         json.dump(json_file, f, indent = 4, sort_keys = False)
         f.close()
 
-    send_forecast_data_to_storage('forecast_data.json')
+    send_to_database('forecast_data.json')
 
     return
 
@@ -90,13 +90,13 @@ def refresh_data():
     # At this point a day will have passed
     days_since_last_retrain += 1
 
-    if (days_since_last_retrain == 15):
+    if (days_since_last_retrain >= 15):
         days_since_last_refresh = 1
 
     post_new_retrain_time(days_since_last_retrain)
 
     # JSON is created for front end use
-    create_json(state_data, forecast_dates)
+    #create_json(state_data, forecast_dates)
 
 
     return
