@@ -7,7 +7,7 @@ With My Covid Tracker, we aim to produce a predictive model for COVID-19 data wi
 ### Major classes
 My Covid Tracker will have a ‘State’ class and ‘StateMetrics’ class. The ‘State’ class will consist of functions to get the name and metrics of a given state including average cases per day, predictions for a given number of days into the future, and the percent change in cases over a given interval. The ‘StateMetrics’ class will contain variables for predictions, average cases per day, and percent change as well as functions to calculate these metrics through interaction with the model. There will also be a ‘Risk Assessment’ class that will contain all of the fields necessary for calculating the risk assessment profile as well as a method that accesses the state metrics class.
 
-![Class Diagram](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/class_diagram.png)
+![Class Diagram](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/class_diagram.jpg)
 
 #### StateMetrics [U015]
 The State_Metrics class will hold all the values calculated by the state’s specific model. It will hold values such as the predictions for up to a month. The average number of cases per day, as well as other fields such as daily percent change and metadate of the model such as the accuracy of the model. The predict_days_out method will take in the number of days in the future to get a set of predictions from and return that amount of days’ worth of predictions as a list.
