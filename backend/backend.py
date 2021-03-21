@@ -96,8 +96,7 @@ def refresh_data():
     post_new_retrain_time(days_since_last_retrain)
 
     # JSON is created for front end use
-    #create_json(state_data, forecast_dates)
-
+    create_json(state_data, forecast_dates)
 
     return
 

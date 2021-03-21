@@ -108,15 +108,13 @@ def regression(days_since_last_retrain):
     # key value pairs
     state_dict = create_state_dict(states, df['state'].sort_values().unique())
 
-    # Store all 50 states worth of metrics
-    all_metrics = []
+    # Store all 50 states worth of information
+    state_objects = []
 
-    # 30 days out
     forecast_dates = []
 
-    # Only saving relevant featutes
+    # Only saving relevant features
     df = df[['submission_date', 'state', 'tot_death', 'new_death', 'tot_cases', 'new_case']]
-
 
     # Changing index to dates as datetime objects
     df['submission_date'] = pd.to_datetime(df.submission_date, format = '%Y-%m-%d')
@@ -142,7 +140,6 @@ def regression(days_since_last_retrain):
         col_missing_vals = check_missing_values(df_filtered)
         indices = find_first_non_nan(df_filtered, col_missing_vals)
         df_filtered = set_initial_zeroes(df_filtered, col_missing_vals, indices)
-
 
         # Creating the label column with pred_out rows to hold truth values
         df_filtered['label'] = df_filtered[pred_column]
@@ -218,16 +215,16 @@ def regression(days_since_last_retrain):
         daily_pct_change = np.array(df_filtered['PCT_change'].values)
 
         # Create new instantiation of StateMetrics class
-        all_metrics.append(StateMetrics(forecast_set, avg_cases_per_day, score, daily_pct_change))
+        metrics = StateMetrics(forecast_set, avg_cases_per_day, score, daily_pct_change)
+
+        # Create new instantiation of State class
+        state_objects.append(State(state, metrics))
+
         forecast_dates.append(dates)
+
+        # Packaging everything into State objects
         print(state + ' predictions complete...')
         print()
-
-
-    state_objects = []
-
-    for i, state in enumerate(states):
-        state_objects.append(State(state, all_metrics[i]))
 
 
     return state_objects, forecast_dates
