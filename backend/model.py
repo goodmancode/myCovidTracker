@@ -185,7 +185,7 @@ def regression(days_since_last_retrain):
         else:
             print('Loading model from ' + pickle_file + '...')
             pickle_in = open(pickle_file, 'rb')
-            best_ridge = pickle.load(pickle_in)
+            pipe = pickle.load(pickle_in)
 
         # Getting the score and forecast set
         score = pipe.score(X_val, y_val)
