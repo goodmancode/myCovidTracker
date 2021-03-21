@@ -1,26 +1,75 @@
-var historicalCovidData = $.ajax({
+var forecastData = setForecastData();
+var historicalCovidData;
+
+function getForecastData() {
+    return new Promise(function (resolve, reject) {
+        var gsRef = storage.ref('forecast_data2.json');
+        gsRef.getDownloadURL()
+            .then((url) => {
+                console.log(url);
+                var xhr = new XMLHttpRequest();
+                xhr.responseType = 'json';
+                xhr.open('GET', url, true);
+                xhr.onload = function () {
+                    var status = xhr.status;
+                    if (status == 200) {
+                        var data = xhr.response;
+                        console.log(data);
+                        resolve(data);
+                    }
+                    else {
+                        reject(status);
+                    }
+                };
+                xhr.send();
+            })
+            .catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                      // File doesn't exist
+                      console.error("[Firebase Storage] - file not found");
+                      break;
+                    case 'storage/unauthorized':
+                      // User doesn't have permission to access the object
+                      console.error("[Firebase Storage] - download not authorized");
+                      break;
+                    case 'storage/canceled':
+                      // User canceled the upload
+                      console.error("[Firebase Storage] = download canceled");
+                      break;
+                    case 'storage/unknown':
+                      // Unknown error occurred, inspect the server response
+                      console.error("[Firebase Storage] - unknown error");
+                      break;
+                }
+            });
+    });
+}
+
+$.ajax({
     url: "https://data.cdc.gov/resource/9mfq-cb36.json",
     type: "GET",
-    async: false,
+    dataType: "json",
     data: {
         "$select" : "submission_date, state, tot_cases",
         "$limit" : 20000,
         "$order" : "submission_date DESC"
+    },
+    success: function(data) {
+        setHistoricalData(data);
     }
-}).responseJSON;
+});
 
-/*
-$.ajax({
-    url: "json/forecast_data.json",
-    dataType: "jsonp",
-    async: false
-}).responseJSON;
-*/
+// Functions that set data once async calls finish
+async function setHistoricalData(data) {
+    historicalCovidData = await data;
+}
 
-// Until a fix for importing forecast_data.json gets written,
-// it will be converted to a .js file for testing.
-var forecastData = forecast_data_convert;
-
+async function setForecastData() {
+    var data = await getForecastData();
+    console.log(data);
+    forecastData = data;
+}
 
 // Use this function to grab chart data
 function generateStateChartData(state, start_date, end_date) {
