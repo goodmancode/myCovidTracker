@@ -16,6 +16,12 @@ $('#start-month').change(function() {
     generateChart(stateName, start_date, end_date);
 });
 
+$('#start-day').change(function() {
+    start_date = getStartDate();
+    destroyChartIfExists();
+    generateChart(stateName, start_date, end_date);
+});
+
 $('#start-year').change(function() {
     start_date = getStartDate();
     destroyChartIfExists()
@@ -70,7 +76,8 @@ function getStartDate() {
     return  document.getElementById('start-year').value
             + "-"
             + document.getElementById('start-month').value
-            + "-01";
+            + "-"
+            + document.getElementById('start-day').value;
 }
 
 function getDateString(date) {
