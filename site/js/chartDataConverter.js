@@ -3,7 +3,7 @@ var historicalCovidData;
 
 function getForecastData() {
     return new Promise(function (resolve, reject) {
-        var gsRef = storage.ref('forecast_data2.json');
+        var gsRef = storage.ref('forecast_data.json');
         gsRef.getDownloadURL()
             .then((url) => {
                 console.log(url);
