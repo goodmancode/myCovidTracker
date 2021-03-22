@@ -29,16 +29,17 @@ signupForm.addEventListener('submit', (e) => {
         // the document name is assigned the user's user id and rules are set 
         // within the database to prevent other users from tampering with the doc
         return db.collection('users').doc(cred.user.uid).set({
-            email: signupForm['signup-email'].value,
-            risk_value: 0,
-            risk_string: "",
+            email: email,
+            risk_value: 0.0,
+            risk_string: '',
+            state: '',
             age: age,
             sex: false,
             loss_of_smell_and_taste: false,
             persistent_cough: false,
-            sever_fatigue: false,
+            severe_fatigue: false,
             skipped_meals: false,
-            level_of_contact: 0,
+            level_of_contact: 0.0,
             immuno_compromised: false,
             vaccinated: false
         });
