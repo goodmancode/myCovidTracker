@@ -22,7 +22,7 @@ class RiskAssessment:
         self.loss_of_smell_and_taste = loss_of_smell_and_taste
         self.persistent_cough = persistent_cough
         self.severe_fatigue = severe_fatigue
-        self.ss = skipped_meals
+        self.skipped_meals = skipped_meals
         self.level_of_contact = level_of_contact
         self.immuno_compromised = immuno_compromised
         self.vaccinated = vaccinated
