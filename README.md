@@ -166,7 +166,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 
 
 ## Task Allocation
-- Robinson - Model hyperparameter tuning, VPS setup class diagrams
+- Robinson - Model hyperparameter tuning, VPS setup, class diagrams
 - Jacob - U023, U039, C4 diagrams, Interface diagram
 - Sairam - U009, ER diagrams
-- Steve - U040, Database integration, Design Document
+- Steve - U040, Database, Design Document
