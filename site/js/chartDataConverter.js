@@ -89,6 +89,14 @@ function generateStateChartData(state, start_date, end_date) {
             },
         ]
     }
+    var trendlineSelected = document.getElementById('trendline-option').checked;
+    if (trendlineSelected === true){
+        chartData.datasets[1]["trendlineLinear"] = {
+            style: "rgba(255,0,255, .8)",
+            lineStyle: "solid",
+            width: 3
+        };
+    } 
     return chartData;
 }
 

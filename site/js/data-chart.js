@@ -35,6 +35,11 @@ $('#prediction-days').change(function() {
     generateChart(stateName, start_date, end_date);
 });
 
+$('#trendline-option').change(function() {
+    destroyChartIfExists();
+    generateChart(stateName, start_date, end_date);
+});
+
 function generateChart(stateName, start_date, end_date) {
     chart = new Chart(ctx, {
         type: 'line',
