@@ -162,11 +162,11 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - [Frontend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/frontend_tests)
 - [Backend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/backend_tests)
 - [Model analysis](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_7/hyper_parameter_results.md)
-- [Demontration](https://youtu.be/eZyocHLPB9w)
+- [Demonstration](https://youtu.be/GbednkogFV4)
 
 
 ## Task Allocation
 - Robinson - Model hyperparameter tuning, VPS setup class diagrams
 - Jacob - U023, U039, C4 diagrams, Interface diagram
 - Sairam - U009, ER diagrams
-- Steve - U017, Database integration, Design Document
+- Steve - U040, Database integration, Design Document
