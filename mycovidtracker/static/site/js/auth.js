@@ -20,6 +20,7 @@ signupForm.addEventListener('submit', (e) => {
     // store input
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
+    const age = signupForm['age'].value;
 
     // ship to Firebase Auth
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
@@ -31,7 +32,7 @@ signupForm.addEventListener('submit', (e) => {
             email: signupForm['signup-email'].value,
             risk_value: 0,
             risk_string: "",
-            age: 0,
+            age: age,
             sex: false,
             loss_of_smell_and_taste: false,
             persistent_cough: false,
