@@ -53,7 +53,7 @@ function onlyNumberKey(evt) {
 function setValue(uid) {
 	document.getElementById("submission").value = uid;
     var state = document.getElementById("state-select").value;
-    var contact = document.getElementById("contact-select").value;
+    var contact = document.querySelector('input[name="contact"]:checked').value;
 
     // Fills result array with the selected option values
     var multi = document.getElementById("multi-select");
@@ -70,7 +70,15 @@ function setValue(uid) {
         }
     }
 
-	// console.log(document.getElementById("submission").value);
+	console.log(document.getElementById("submission").value);
+    console.log(state);
+    console.log(contact);
+    console.log(result.includes(1));
+    console.log(result.includes(2));
+    console.log(result.includes(3));
+    console.log(result.includes(4));
+    console.log(result.includes(5));
+    console.log(result.includes(6));
 
     return db.collection('users').doc(uid).set({
         state: state,
@@ -81,5 +89,5 @@ function setValue(uid) {
         level_of_contact: contact,
         immuno_compromised: result.includes(5),
         vaccinated: result.includes(6)
-    });
+    }, { merge: true });
 }

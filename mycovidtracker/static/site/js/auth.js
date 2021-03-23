@@ -21,7 +21,7 @@ signupForm.addEventListener('submit', (e) => {
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
     const age = signupForm['age'].value;
-    const sexCheck = signupForm['sex'].value;
+    const sexCheck = document.querySelector('input[name="sex"]:checked').value;
     const sex = (sexCheck == 'true');
 
     // ship to Firebase Auth
