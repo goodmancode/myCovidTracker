@@ -50,7 +50,36 @@ function onlyNumberKey(evt) {
     return true; 
 } 
 
-function setValue(value) {
-	document.getElementById("submission").value = value;
-	console.log(document.getElementById("submission").value);
+function setValue(uid) {
+	document.getElementById("submission").value = uid;
+    var state = document.getElementById("state-select").value;
+    var contact = document.getElementById("contact-select").value;
+
+    // Fills result array with the selected option values
+    var multi = document.getElementById("multi-select");
+
+    var result = [];
+    var options = multi && multi.options;
+    var opt;
+
+    for (var i = 0, iLen=options.length; i<iLen; i++) {
+        opt = options[i];
+
+        if (opt.selected) {
+            result.push(opt.value);
+        }
+    }
+
+	// console.log(document.getElementById("submission").value);
+
+    return db.collection('users').doc(uid).set({
+        state: state,
+        loss_of_smell_and_taste: result.includes(1),
+        persistent_cough: result.includes(4),
+        severe_fatigue: result.includes(2),
+        skipped_meals: result.includes(3),
+        level_of_contact: contact,
+        immuno_compromised: result.includes(5),
+        vaccinated: result.includes(6)
+    });
 }

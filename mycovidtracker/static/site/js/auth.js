@@ -21,6 +21,8 @@ signupForm.addEventListener('submit', (e) => {
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
     const age = signupForm['age'].value;
+    const sexCheck = signupForm['sex'].value;
+    const sex = (sexCheck == 'true');
 
     // ship to Firebase Auth
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
@@ -30,16 +32,16 @@ signupForm.addEventListener('submit', (e) => {
         // within the database to prevent other users from tampering with the doc
         return db.collection('users').doc(cred.user.uid).set({
             email: email,
-            risk_value: 0.0,
+            risk_value: 0,
             risk_string: '',
             state: '',
             age: age,
-            sex: false,
+            sex: sex,
             loss_of_smell_and_taste: false,
             persistent_cough: false,
             severe_fatigue: false,
             skipped_meals: false,
-            level_of_contact: 0.0,
+            level_of_contact: 0,
             immuno_compromised: false,
             vaccinated: false
         });

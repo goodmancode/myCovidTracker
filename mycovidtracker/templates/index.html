@@ -103,6 +103,13 @@
 				<div class="input-field">
 					<input class="validate" placeholder="Enter your age here" id="age" type="number" onkeypress="return onlyNumberKey(event)" min="1" max="125" oninput="this.value = truncate(this.value)">
 				</div>
+				<div class="input-field">
+					<select id="sex">
+					  <option value="" disabled selected>Select your sex.</option>
+					  <option value='true'>Male</option>
+					  <option value='false'>Female</option>
+					</select>
+				</div>
 				<button class="btn-small" id="signup-button">Sign up</button>
 				<p class="helper-text red-text center-align"></p>
 				</form>
@@ -347,50 +354,23 @@
 							<div class="col s12 center-align">
 								<h5>Risk Factors</h5>
 							</div>
-							<div class="input-field col s6" id="immuno-select" >
-								<select>
-								  <option value="" disabled selected>Are you immunocompromised?</option>
-								  <option value="1" title="I am immunocompromised.">Yes</option>
-								  <option value="2" title="I am not immunocompromised.">No</option>
-								</select>
-							</div>
-							<div class="input-field col s6" id="vaccine-select">
-								<select>
-								  <option value="" disabled selected>Have you been vaccinated?</option>
-								  <option value="1" title="I have been vaccinated.">Yes</option>
-								  <option value="2" title="I have not been vaccinated.">No</option>
-								</select>
-							</div>
-							<div class="input-field col s6" id="diag-select">
-								<select>
-								  <option value="" disabled selected>Have you been positively diagnosed with COVID-19 before?</option>
-								  <option value="1" title="I have been dignosed with COVID-19.">Yes</option>
-								  <option value="2" title="I have not been diagnosed with COVID-19.">No</option>
-								</select>
-							</div>
 							<div class="input-field col s6" id="location-select">
-								<select>
+								<select id="contact-select">
 								  <option value="" disabled selected>Choose the risk level of the places you intend to go</option>
 								  <option value="1" title="I plan to visit sparsely populated areas with open air or good ventilation.">Low</option>
 								  <option value="2" title="I plan to visit highly populated areas with open air or good ventilation or areas with poor ventilation that are sparsely populated.">Medium</option>
 								  <option value="3" title="I plan to visit highly populated areas with poor ventilation.">High</option>
 								</select>
 							</div>
-							<div class="input-field col s6" id="interaction-select">
-								<select>
-								  <option value="" disabled selected>Choose your intended level of interaction</option>
-								  <option value="1" title="I will interact with few people and few things other people touch; this means you will keep interation to a minimum and do things like order groceries.">Low</option>
-								  <option value="2" title="I will interact with a moderate amount of people and things other people touch; this means you will do things like use shopping carts and public doors.">Medium</option>
-								  <option value="3" id="high" title="I will interact with many people and things other people touch; this means you will do things like handling money and going out to eat frequently or you work in a high traffic environment.">High</option>
-								</select>
-							</div>
-							<div class="input-field col s6" id="symptom-select">
-								<select multiple>
+							<div class="input-field col s6">
+								<select multiple id="multi-select">
 								  <option value="" disabled selected>Select all that apply</option>
 								  <option value="1">I have loss of smell and taste</option>
 								  <option value="2">I have been experiencing severe fatigue</option>
 								  <option value="3">I have loss of appetite</option>
 								  <option value="4">I have a persistent cough</option>
+								  <option value="5">I have been vaccinated.</option>
+								  <option value="6">I am immunocompromised.</option>
 								</select>
 							  </div>
 						</div>
