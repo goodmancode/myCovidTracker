@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+			<meta charset="UTF-8">
+			<link rel="stylesheet" href="css/style.css">
+			<link rel="preconnect" href="https://fonts.gstatic.com">
+			<link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
+			<!--Import Google Icon Font-->
+			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">		
+			<!-- Compiled and minified CSS -->
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+			<!--Let browser know website is optimized for mobile-->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>My Covid Tracker</title>
+	</head>
+	<body><main>
+
+		<div class="intro">
+			<h1 class="logo-header">
+				<span class="logo">Covid</span>
+				<span class="logo">Tracker</span>
+			</h1>
+		</div>
+		
+		<!-- navbar -->
+		<nav>
+			<div class="nav-wrapper teal">
+				<!-- sidenav trigger -->
+				<a href="#" class="sidenav-trigger" data-target="mobile-links" id="sidemenu"><i class="material-icons" id="menu-button">menu</i></a>
+				<a href="#" class="brand-logo center">My Covid Tracker</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li class="logged-in">
+						<a href="#" class="modal-trigger" data-target="modal-account" id="account">Account</a>
+					</li>
+					<li class="logged-in">
+						<a href="#" id="logout">Logout</a>
+					</li>
+					<li class="logged-out">
+						<a href="#" class="modal-trigger" data-target="modal-login" id="login">Login</a>
+					</li>
+					<li class="logged-out">
+						<a href="#" class="modal-trigger" data-target="modal-signup" id="signup">Sign up</a>
+					</li>
+					<li>
+						<a href="#" class="modal-trigger" data-target="modal-resources">Helpful Resources</a>
+					</li>
+					<li>
+						<a href="https://github.com/goodmancode/myCovidTracker" target="_blank" rel="noopener noreferrer">github</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- sidenav content -->
+		<ul class="sidenav" id="mobile-links">
+			<li class="logged-in">
+				<a href="#" class="modal-trigger" data-target="modal-account" id="accountm">Account</a>
+			</li>
+			<li class="logged-in">
+				<a href="#" id="logout">Logout</a>
+			</li>
+			<li class="logged-out">
+				<a href="#" class="modal-trigger" data-target="modal-login" id="loginm">Login</a>
+			</li>
+			<li class="logged-out">
+				<a href="#" class="modal-trigger" data-target="modal-signup" id="signupm">Sign up</a>
+			</li>
+			<li>
+				<a href="#" class="modal-trigger" data-target="modal-resources">Helpful Resources</a>
+			</li>
+			<li>
+				<a href="https://github.com/goodmancode/myCovidTracker" target="_blank" rel="noopener noreferrer">github</a>
+			</li>
+		</ul>
+
+		<!-- helpful resources modal -->
+		<div id="modal-resources" class="modal">
+			<div class="modal-content">
+				<h4>Helpful Resources</h4>
+				<ul>
+					<li><a href="https://www.cdc.gov/coronavirus/2019-ncov/travelers/travel-during-covid19.html" target="_blank" rel="noopener noreferrer">Traveling During COVID-19</a></li>
+					<li><a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html" target="_blank" rel="noopener noreferrer">Protecting Yourself from COVID-19</a></li>
+					<li><a href="https://www.cdc.gov/coronavirus/2019-ncov/transmission/variant.html" target="_blank" rel="noopener noreferrer">About Variants of the Virus</a></li>
+					<li><a href="https://www.cdc.gov/coronavirus/2019-ncov/covid-data/covidview/index.html" target="_blank" rel="noopener noreferrer">COVID data tracker weekly review</a></li>
+				</ul> 
+			</div>
+		</div>
+
+		<!-- signup modal -->
+		<div id="modal-signup" class="modal">
+			<div class="modal-content">
+				<h4>Sign up</h4><br />
+				<form id="signup-form">
+				<div class="input-field">
+					<input type="email" id="signup-email" required />
+					<label for="signup-email">Enter Email</label>
+				</div>
+				<div class="input-field">
+					<input type="password" id="signup-password" required />
+					<label for="signup-password">Choose Password (minimum 6 characters)</label>
+				</div>
+				<div class="input-field">
+					<!-- <input class="validate" placeholder="Enter your age here" id="age" type="number" onkeypress="return onlyNumberKey(event)" min="1" max="125" oninput="this.value = truncate(this.value)"> -->
+					<input type="text" class="datepicker" id="dob" placeholder="Enter your date of birth" required>
+				</div>
+				<div>
+					<label for="sex">Select your sex:</label>
+					<p>
+						<label>
+						  <input name="sex" type="radio" value="true" checked />
+						  <span>Male</span>
+						</label>
+					</p>
+					<p>
+						<label>
+						  <input name="sex" type="radio" value="false"/>
+						  <span>Female</span>
+						</label>
+					</p>
+				</div>
+				<div class="center-align">
+					<button class="btn-small" id="signup-button">Sign up</button>
+				</div>
+				<p class="helper-text red-text center-align"></p>
+				</form>
+			</div>
+		</div>
+
+		<!-- login modal -->
+		<div id="modal-login" class="modal">
+			<div class="modal-content">
+				<h4>Login</h4><br />
+				<form id="login-form">
+					<div class="input-field">
+						<input type="email" id="login-email" required />
+						<label for="login-email">Email</label>
+					</div>
+					<div class="input-field">
+						<input type="password" id="login-password" required />
+						<label for="login-password">Password</label>
+					</div>
+					<button class="btn-small" id='login-button'>Login</button>
+					<!-- of type button to avoid default form submission behaviour -->
+					<a href="#" class="modal-trigger white-text" data-target="modal-reset"><button class="btn-small" type ="button" id="reset-button" onclick="$('#modal-login').modal('close');">Forgot Password?</button></a>
+					<p class="helper-text red-text center-align" id="login-error"></p>
+				</form>
+			</div>
+		</div>
+
+		<!-- password reset modal -->
+		<div id="modal-reset" class="modal">
+			<div class="modal-content">
+				<h4>Reset Password</h4><br />
+				<form id="reset-form">
+					<div class="input-field">
+						<input type="email" id="reset-email" required />
+						<label for="reset-email">Email</label>
+					</div>
+					<button class="btn-small" id="reset-confirm">Reset Password</button>
+					<p class="helper-text red-text center-align" id="reset-error"></p>
+				</form>
+			</div>
+		</div>
+
+		<!-- account deletion modal -->
+		<div id="modal-delete" class="modal">
+			<div class="modal-content">
+				<h4>Delete Account</h4><br />
+				<form id="delete-form">
+					<div class="input-field">
+						<input type="password" id="deletion-password" required />
+						<label for="deletion-password">Password</label>
+					</div>
+					<button class="btn-small" id="confirm-delete">Delete Account</button>
+					<p class="helper-text red-text center-align"></p>
+				</form>
+			</div>
+		</div>
+
+		<!-- account modal -->
+		<div id="modal-account" class="modal">
+			<div class="modal-content">
+				<h4>Account details</h4>
+				<hr>
+				<br>
+				<div class="account-details" id="details"></div>
+				<br>
+				<a href="#" class="modal-trigger white-text" data-target="modal-delete"><button class="btn-small" type ="button" id="delete-button" onclick="$('#modal-account').modal('close');">Delete Account</button></a>
+			</div>
+		</div>
+
+
+		<div class="container z-depth-1" style="width: 100%; max-width:1920px; background-color:#FFFFFF;">
+			<div class="section">
+				<div class="row">
+					<div class="col s12 m12 l6 center-align">
+						<div class="row">
+							<h5>State Selection</h5>
+						</div>
+						<div class="row">
+							<div class="input-field col s6 offset-s3">
+								<select id="state-select" name="state-select" class="browser-default z-depth-1">
+									<option value="" disabled selected>Choose a state</option>
+									<option value="Alabama">Alabama</option>
+									<option value="Alaska">Alaska</option>
+									<option value="Arizona">Arizona</option>
+									<option value="Arkansas">Arkansas</option>
+									<option value="California">California</option>
+									<option value="Colorado">Colorado</option>
+									<option value="Connecticut">Connecticut</option>
+									<option value="Delaware">Delaware</option>
+									<option value="Florida">Florida</option>
+									<option value="Georgia">Georgia</option>
+									<option value="Hawaii">Hawaii</option>
+									<option value="Idaho">Idaho</option>
+									<option value="Illinois">Illinois</option>
+									<option value="Indiana">Indiana</option>
+									<option value="Iowa">Iowa</option>
+									<option value="Kansas">Kansas</option>
+									<option value="Kentucky">Kentucky</option>
+									<option value="Louisiana">Louisiana</option>
+									<option value="Maine">Maine</option>
+									<option value="Maryland">Maryland</option>
+									<option value="Massachusetts">Massachusetts</option>
+									<option value="Michigan">Michigan</option>
+									<option value="Minnesota">Minnesota</option>
+									<option value="Mississippi">Mississippi</option>
+									<option value="Missouri">Missouri</option>
+									<option value="Montana">Montana</option>
+									<option value="Nebraska">Nebraska</option>
+									<option value="Nevada">Nevada</option>
+									<option value="New Hampshire">New Hampshire</option>
+									<option value="New Jersey">New Jersey</option>
+									<option value="New Mexico">New Mexico</option>
+									<option value="New York">New York</option>
+									<option value="North Carolina">North Carolina</option>
+									<option value="North Dakota">North Dakota</option>
+									<option value="Ohio">Ohio</option>
+									<option value="Oklahoma">Oklahoma</option>
+									<option value="Oregon">Oregon</option>
+									<option value="Pennsylvania">Pennsylvania</option>
+									<option value="Rhode Island">Rhode Island</option>
+									<option value="South Carolina">South Carolina</option>
+									<option value="South Dakota">South Dakota</option>
+									<option value="Tennessee">Tennessee</option>
+									<option value="Texas">Texas</option>
+									<option value="Utah">Utah</option>
+									<option value="Vermont">Vermont</option>
+									<option value="Virginia">Virginia</option>
+									<option value="Washington">Washington</option>
+									<option value="West Virginia">West Virginia</option>
+									<option value="Wisconsin">Wisconsin</option>
+									<option value="Wyoming">Wyoming</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div id="us-map" class="col s12 m10 l10 offset-m1 offset-l1"></div>
+						</div>
+					</div>
+					<div class="col s12 m12 l6">
+						<div class="row">
+							<h5 class="center">Data chart and predictions</h5>
+						</div>
+						<div class="row">
+							<canvas id="data-chart"></canvas>
+						</div>
+						<div class="row">
+							<div class="col s12 m8 l8">
+								<p>Start Date</p>
+								<div class="input-field col s4">
+									<select id="start-month" class="browser-default z-depth-1">
+										<option value="" disabled>Month</option>
+										<option value="01">January</option>
+										<option value="02">February</option>
+										<option value="03" selected>March</option>
+										<option value="04">April</option>
+										<option value="05">May</option>
+										<option value="06">June</option>
+										<option value="07">July</option>
+										<option value="08">August</option>
+										<option value="09">September</option>
+										<option value="10">October</option>
+										<option value="11">November</option>
+										<option value="12">December</option>
+									</select>
+								</div>
+								<div class="input-field col s4">
+									<select id="start-day" class="browser-default z-depth-1">
+										<option value="" disabled>Day</option>
+										<option value="01" selected>01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										<option value="31">31</option>
+									</select>
+								</div>
+								<div class="input-field col s4">
+									<select id="start-year" class="browser-default z-depth-1">
+										<option value="" disabled>Year</option>
+										<option value="2021" selected>2021</option>
+										<option value="2020">2020</option>
+										<option value="2019">2019</option>
+									</select>
+								</div>
+							</div>
+							<div class="col s12 m4 l4">
+								<p>Days (from today) to Predict</p>
+								<form action="#">
+									<p class="range-field">
+										<input type="range" id="prediction-days" min="0" max="30" value="7"/>
+									</p>
+								</form>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12">
+								<p>Chart Options</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12">
+								<form action="#">
+									<p>
+										<label for="trendline-option">
+										  <input id="trendline-option" type="checkbox" class="filled-in" />
+										  <span>Show prediction trend line</span>
+										</label>
+									</p>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h5 class="logged-out center-align">Please<a href="#" onclick="$('#modal-login').modal('open');"> Login </a> or <a href="#" onclick="$('#modal-signup').modal('open');"> Sign Up </a>for Risk Assessment</h5>
+				<div class="row logged-in">
+					<div class="col s12 m12 l6">
+						<div class="row">
+							<div class="col s12 center-align logged-in">
+								<h5>Risk Factors</h5>
+							</div>
+							<div class="input-field col s6 m6 l4 offset-l4 offset-m3 offset-s3">
+								
+								<div>
+									<label for="contact">Select the risk level of the places you intend to go:</label>
+									<p>
+										<label>
+										  <input name="contact" type="radio" value=0 checked/>
+										  <span class="tooltipped"  data-position="top" data-tooltip="I plan to visit sparsely populated areas with open air or good ventilation.">Low</span>
+										</label>
+									</p>
+									<p>
+										<label>
+										  <input name="contact" type="radio" value=1 />
+										  <span class="tooltipped"  data-position="top" data-tooltip="I plan to visit highly populated areas with open air or good ventilation or areas with poor ventilation that are sparsely populated.">Medium</span>
+										</label>
+									</p>
+									<p>
+										<label>
+										  <input name="contact" type="radio" value=2 />
+										  <span class="tooltipped"  data-position="top" data-tooltip="I plan to visit highly populated areas with poor ventilation.">High</span>
+										</label>
+									</p>
+								</div>
+							</div>
+							<div class="input-field col s6 m6 l4 offset-l4 offset-m3 offset-s3">
+							<p>Select all that apply:</p>
+								<p>
+								<label>
+									<input id="1" class="multi-select" type="checkbox"value="1" />
+									<span>I have loss of smell and taste</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="2" class="multi-select" type="checkbox" value="2" />
+									<span>I have been experiencing severe fatigue</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="3" class="multi-select" type="checkbox" value="3" />
+									<span>I have loss of appetite</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="4" class="multi-select" type="checkbox" value="4" />
+									<span>I have a persistent cough</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="5" class="multi-select" type="checkbox" value="5" />
+									<span>I am immunocompromised</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="6" class="multi-select" type="checkbox" value="6" />
+									<span>I have been vaccinated</span>
+								</label>
+								</p>
+							</div>
+						</div>
+						<div class="container center-align">
+							<form id="todjango">
+								{% csrf_token %}
+								<button class="btn" onclick=
+								"setValue(auth.currentUser.uid);
+								document.getElementById('loader').style.display='block';
+								document.getElementById('risk-container').style.display='none';
+								getRiskAssessment(auth.currentUser.uid);
+								M.toast({html: 'Risk Factors sent. Please wait...', displayLength: 1000});" 
+								value="" id="submission" name="submission">Submit</button>
+							</form>
+						</div>					
+					</div>
+					<div class="col s12 m12 l6">
+						<div class="row">
+							<div class="col s12 center-align">
+								<h5>Risk Assessment</h5>
+								<div class="container center-align" style="display: none;" id="loader">
+									<br><br>
+									<div class="preloader-wrapper big active center-align" >
+										<div class="spinner-layer spinner-teal-only">
+										  <div class="circle-clipper left">
+											<div class="circle"></div>
+										  </div><div class="gap-patch">
+											<div class="circle"></div>
+										  </div><div class="circle-clipper right">
+											<div class="circle"></div>
+										  </div>
+										</div>
+									</div>
+								</div>
+								<div class="col s6 m6 l8 offset-l2 offset-m3 offset-s3" style="display: none;" id="risk-container">
+									<br>
+									<div class="risk" id="risk-color" style="height: 15rem;">
+										<br>
+										<h6 id="risk-assessment"></h6>
+									  </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
+
+		<!-- TODO: Add SDKs for Firebase products that you want to use
+			https://firebase.google.com/docs/web/setup#available-libraries -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-analytics.js"></script>
+		
+		<!-- Your web app's Firebase configuration -->
+		<script src="js/firebaseConfig.js"></script>
+		
+		<!--jQuery-->
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+		<!-- materialize JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+		<!-- custom JavaScript -->
+		<script src="js/app.js"></script>
+		<script src="js/index.js"></script>
+		<script src="js/auth.js"></script>
+		
+		<!--US Map-->
+		<script src="js/raphael.js"></script>
+		<script src="js/us-map-svg.js"></script>
+		<script src="js/interactive-map.js"></script>
+
+		<!-- Chart.js and chart scripts -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline"></script>
+		<script src="js/chartDataConverter.js"></script>
+		<script src="js/state_list.js"></script>
+		<script src="js/data-chart.js"></script>
+
+		<script>
+			$(document).ready(function(){
+				var today = new Date()
+				$('.sidenav').sidenav();
+				$('select').formSelect();
+				$('.tooltipped').tooltip();
+				$('.datepicker').datepicker({
+					format: 'yyyy-mm-dd',
+					minDate: new Date("1900-01-01T00:00:00"),
+					maxDate: today,
+					yearRange: [1900, today.getFullYear()],
+					showClearBtn: true
+				});
+			});
+			
+			$(document).on('submit', '#todjango', function(e) {
+				e.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/submit/',
+					data: {
+						uid: $('#submission').val(),
+						csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+					},
+				});
+			});
+
+		</script>
+	</main></body>
+	<footer class="page-footer teal">
+		<div class="container" style="width: 98%; max-width:1920px;">
+			<div class="row">
+				<p>© 2021 MyCovidTracker</p>
+			</div>
+		</div>
+	</footer>
+</html>
+
