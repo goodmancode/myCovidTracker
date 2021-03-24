@@ -1,21 +1,98 @@
-import json, schedule, os, requests, time
+import json, schedule, os, requests, time, firebase_admin
 from urllib.error import HTTPError
 
 from datetime import datetime, timedelta
-from firebase_admin import credentials, initialize_app, storage
+from firebase_admin import credentials, initialize_app, storage, firestore
 from get_retrain_days import get_retrain_time, post_new_retrain_time
 from model import regression
 from State import State
 from StateMetrics import StateMetrics
+from RiskAssessment import RiskAssessment
 
 import numpy as np
 import pandas as pd
 
-def send_to_database(filename):
+def send_state_info_to_database(state_data):
+    # Getting credentials to access database
     cred = credentials.Certificate('service.json')
-    initialize_app(cred, {'storageBucket': 'mycovidtracker-5e186.appspot.com'})
 
-    bucket = storage.bucket()
+    # Ensures that firebase has not already been started
+    if not firebase_admin._apps:
+        firebase_admin.initialize_app(cred)
+
+    db = firestore.client()
+
+    for state in state_data:
+        doc_ref = db.collection(u'states').document(state.name)
+        doc_ref.set({
+            u'predictions': state.metrics.predictions.tolist(),
+            u'avg_cases_per_day': state.metrics.avg_cases_per_day,
+            u'model_accuracy': state.metrics.model_accuracy,
+            u'percent_change': state.metrics.percent_change.tolist(),
+        }, merge = True)
+
+def send_risk_to_database(uid):
+    # Getting credentials to access database
+    cred = credentials.Certificate('service.json')
+
+    # Ensures that firebase has not already been started
+    if not firebase_admin._apps:
+        firebase_admin.initialize_app(cred)
+
+    # Getting access to the database
+    db = firestore.client()
+
+    # Getting the users information
+    user_inputs = db.collection(u'users').document(uid)
+
+    # Putting database fields into python readable format
+    fields = user_inputs.get().to_dict()
+
+    state = str(fields['state'])
+    print(state)
+    # Setting fields for risk assessment
+    age = fields['age']
+    sex = fields['sex']
+    loss_of_smell_and_taste = fields['loss_of_smell_and_taste']
+    persistent_cough = fields['persistent_cough']
+    severe_fatigue = fields['severe_fatigue']
+    skipped_meals = fields['skipped_meals']
+    level_of_contact = fields['level_of_contact']
+    immuno_compromised = fields['immuno_compromised']
+    vaccinated = fields['vaccinated']
+    state_info = db.collection('states').document(state)
+
+    state_metrics = state_info.get().to_dict()
+
+    metrics = StateMetrics(state_metrics['predictions'], state_metrics['avg_cases_per_day'], state_metrics['model_accuracy'], state_metrics['percent_change'])
+
+    risk = RiskAssessment(age, sex, loss_of_smell_and_taste, persistent_cough, severe_fatigue, skipped_meals, level_of_contact, immuno_compromised, vaccinated, metrics)
+    risk_value, risk_string = risk.risk_assessment()
+
+    user_inputs.set({
+        u'age': age,
+        u'sex': sex,
+        u'loss_of_smell_and_taste': loss_of_smell_and_taste,
+        u'persistent_cough': persistent_cough,
+        u'severe_fatigue': severe_fatigue,
+        u'skipped_meals': skipped_meals,
+        u'level_of_contact': level_of_contact,
+        u'immuno_compromised': immuno_compromised,
+        u'vaccinated': vaccinated,
+        u'risk_string': risk_string,
+        u'risk_value': risk_value
+    }, merge = True)
+
+    return
+
+def send_json_to_database(filename):
+    cred = credentials.Certificate('service.json')
+    initialized = firebase_admin._apps
+
+    if not initialized:
+        initialize_app(cred, {'storageBucket': 'mycovidtracker-5e186.appspot.com'})
+
+    bucket = storage.bucket('mycovidtracker-5e186.appspot.com') if initialized else storage.bucket()
     blob = bucket.blob(filename)
     blob.upload_from_filename(filename)
     blob.make_public()
@@ -41,7 +118,7 @@ def create_json(state_data, dates):
         json.dump(json_file, f, indent = 4, sort_keys = False)
         f.close()
 
-    send_to_database('forecast_data.json')
+    send_json_to_database('forecast_data.json')
 
     return
 
@@ -87,6 +164,8 @@ def refresh_data():
     # Model training and prediction
     state_data, forecast_dates = regression(days_since_last_retrain)
 
+    send_state_info_to_database(state_data)
+
     # At this point a day will have passed
     days_since_last_retrain += 1
 
@@ -104,6 +183,7 @@ def refresh_data():
 if __name__ == '__main__':
     api_call()
     refresh_data()
+    send_risk_to_database('GvKW18YjLaYrCeAFp8zp40EJhKk1')
 
     '''
     while True:

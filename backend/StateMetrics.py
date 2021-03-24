@@ -7,11 +7,12 @@ class StateMetrics:
     percent_change = None
     days_out = None
 
-    def __init__(self, predictions, avg_cases_per_day, model_accuracy, percent_change):
+    def __init__(self, predictions, avg_cases_per_day, model_accuracy, percent_change, days_out = 7):
         self.predictions = predictions
         self.avg_cases_per_day = avg_cases_per_day
         self.model_accuracy = model_accuracy
         self.percent_change = percent_change
+        self.days_out = days_out
 
     def get_predictions(self):
         return self.predictions

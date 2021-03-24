@@ -13,7 +13,7 @@ class RiskAssessment:
     level_of_contact = None
     immuno_compromised = None
     vaccinated = None
-    stateInfo = None
+    state_metrics = None
 
 
     def __init__(self, age, sex, loss_of_smell_and_taste, persistent_cough, severe_fatigue, skipped_meals, level_of_contact, immuno_compromised, vaccinated, StateMetrics):
@@ -26,17 +26,17 @@ class RiskAssessment:
         self.level_of_contact = level_of_contact
         self.immuno_compromised = immuno_compromised
         self.vaccinated = vaccinated
-        self.stateInfo = StateMetrics
+        self.state_metrics = StateMetrics
 
     def set_riskAssessment(self):
         self.risk_value, self.risk_string = self.risk_assessment()
         return
 
     def risk_from_predicted_cases(self):
-        days_out = self.stateInfo.days_out
-        pct_change = np.array(self.stateInfo.get_percent_change())
-        forecast_pct_change = (np.array(self.stateInfo.predictions[days_out]) - np.array(self.stateInfo.predictions[0])) / np.array(self.stateInfo.predictions[0]) * 100.0
-        avg_pct_change = (sum(pct_change / len(self.stateInfo.get_percent_change()))) * 100.0
+        days_out = self.state_metrics.days_out
+        pct_change = np.array(self.state_metrics.get_percent_change())
+        forecast_pct_change = (np.array(self.state_metrics.predictions[days_out]) - np.array(self.state_metrics.predictions[0])) / np.array(self.state_metrics.predictions[0]) * 100.0
+        avg_pct_change = (sum(pct_change / len(self.state_metrics.get_percent_change()))) * 100.0
 
         if ((avg_pct_change - forecast_pct_change) > 0):
             return 0 # less risk
@@ -47,10 +47,7 @@ class RiskAssessment:
         if type(bool_data) != bool:
             raise Exception("input should be a boolean")
 
-        if (bool_data == True):
-            return 1
-        else:
-            return 0
+        return 1 if bool_data else 0
 
     def set_age(self, age):
         if type(age) != int:
@@ -121,13 +118,13 @@ class RiskAssessment:
 
         if risk_value > 0.0 and risk_value <= .20:
             risk_string = 'Low - Travel is reccommended'
-        if risk_value > 0.20 and risk_value <= .40:
+        elif risk_value > 0.20 and risk_value <= .40:
             risk_string = 'Low - Travel with low exposure'
-        if risk_value > 0.40 and risk_value <= .60:
+        elif risk_value > 0.40 and risk_value <= .60:
             risk_string = 'Medium - Travel with caution'
-        if risk_value > 0.60 and risk_value <= .80:
+        elif risk_value > 0.60 and risk_value <= .80:
             risk_string = 'Medium - Travel with high caution'
-        if risk_value > 0.80 and risk_value <= 1.0:
+        elif risk_value > 0.80 and risk_value <= 1.0:
             risk_string = 'High - Travel not reccommended'
 
         return risk_value, risk_string

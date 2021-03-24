@@ -195,6 +195,10 @@ def regression(days_since_last_retrain):
 
         df_filtered['Forecast'] = np.nan # Forecast Column
 
+        # Prepping fields for StateMetrics
+        avg_cases_per_day = df_filtered['tot_cases'].mean()
+        daily_pct_change = np.array(df_filtered['PCT_change'].values)
+
         # Getting next 30 days
         last_date = df_filtered.iloc[-1].name
         last_unix = last_date.timestamp()
@@ -209,10 +213,6 @@ def regression(days_since_last_retrain):
             dates.append(next_date)
             next_unix += one_day
             df_filtered.loc[next_date] = [np.nan for _ in range(len(df_filtered.columns) - 1)] + [j]
-
-        # Prepping fields for StateMetrics
-        avg_cases_per_day = df_filtered['tot_cases'].mean()
-        daily_pct_change = np.array(df_filtered['PCT_change'].values)
 
         # Create new instantiation of StateMetrics class
         metrics = StateMetrics(forecast_set, avg_cases_per_day, score, daily_pct_change)
