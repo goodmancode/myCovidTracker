@@ -73,19 +73,22 @@ async function setForecastData() {
 
 // Use this function to grab chart data
 function generateStateChartData(state, start_date, end_date) {
+    var state_historical_data = getStateSpecificHistorical(state, historicalCovidData, start_date, end_date);
+    var state_forecast_data = getStateSpecificForecast(state, forecastData, start_date, end_date);
+    state_forecast_data.unshift(state_historical_data[0]);
     var chartData = {
         datasets: [
             {
                 label: 'Total Cases',
                 backgroundColor: 'rgba(255,0,0,0.25)',
                 borderColor: 'red',
-                data: getStateSpecificHistorical(state, historicalCovidData, start_date, end_date),
+                data: state_historical_data,
             },
             {
                 label: 'Forecasted',
                 backgroundColor: 'rgba(0,0,255,0.25)',
                 borderColor: 'blue',
-                data: getStateSpecificForecast(state, forecastData, start_date, end_date),
+                data: state_forecast_data,
             },
         ]
     }
