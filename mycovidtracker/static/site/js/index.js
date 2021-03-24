@@ -63,8 +63,8 @@ function getAge(dateString) {
 
 function setValue(uid) {
 	document.getElementById("submission").value = uid;
-    var state = document.getElementById("state-select").value;
-    var contact = Number(document.querySelector('input[name="contact"]:checked').value);
+    const state = document.getElementById("state-select").value;
+    const contact = Number(document.querySelector('input[name="contact"]:checked').value);
 
     // Fills result array with the selected option values
     var multi = document.getElementById("multi-select");
@@ -83,16 +83,15 @@ function setValue(uid) {
 
     var userRef = db.collection('users').doc(uid);
     userRef.get().then((doc) => {
-        var dob = doc.data().dob;
-        console.log(dob)
 
-        var smell_taste = result.includes("1");
-        var fatigue = result.includes("2");
-        var appetite = result.includes("3");
-        var cough = result.includes("4");
-        var compromised = result.includes("5");
-        var vaccinated = result.includes("6");
-        var age = getAge(dob);
+        const dob = doc.data().dob;
+        const smell_taste = result.includes("1");
+        const fatigue = result.includes("2");
+        const appetite = result.includes("3");
+        const cough = result.includes("4");
+        const compromised = result.includes("5");
+        const vaccinated = result.includes("6");
+        const age = getAge(dob);
     
         console.log(document.getElementById("submission").value);
         console.log(dob);
