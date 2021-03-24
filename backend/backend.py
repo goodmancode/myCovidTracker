@@ -183,10 +183,3 @@ def refresh_data():
 if __name__ == '__main__':
     api_call()
     refresh_data()
-    send_risk_to_database('GvKW18YjLaYrCeAFp8zp40EJhKk1')
-
-    '''
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-        '''
