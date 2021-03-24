@@ -14,7 +14,7 @@ import pandas as pd
 
 def send_state_info_to_database(state_data):
     # Getting credentials to access database
-    cred = credentials.Certificate('/root/mycovidtracker/static/service.json')
+    cred = credentials.Certificate('service.json')
 
     # Ensures that firebase has not already been started
     if not firebase_admin._apps:
@@ -33,7 +33,7 @@ def send_state_info_to_database(state_data):
 
 def send_risk_to_database(uid):
     # Getting credentials to access database
-    cred = credentials.Certificate('/root/mycovidtracker/static/service.json')
+    cred = credentials.Certificate('service.json')
 
     # Ensures that firebase has not already been started
     if not firebase_admin._apps:
@@ -86,7 +86,7 @@ def send_risk_to_database(uid):
     return
 
 def send_json_to_database(filename):
-    cred = credentials.Certificate('/root/mycovidtracker/static/service.json')
+    cred = credentials.Certificate('service.json')
     initialized = firebase_admin._apps
 
     if not initialized:
