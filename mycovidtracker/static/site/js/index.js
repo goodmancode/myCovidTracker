@@ -64,7 +64,7 @@ function getAge(dateString) {
 function setValue(uid) {
 	document.getElementById("submission").value = uid;
     var state = document.getElementById("state-select").value;
-    var contact = document.querySelector('input[name="contact"]:checked').value;
+    var contact = Number(document.querySelector('input[name="contact"]:checked').value);
 
     // Fills result array with the selected option values
     var multi = document.getElementById("multi-select");
