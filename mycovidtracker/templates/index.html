@@ -5,11 +5,13 @@
 	<head>
 			<meta charset="UTF-8">
 			<link rel="stylesheet" href="{% static '/site/css/style.css' %}">
-			<link rel="stylesheet" href="{% static '/site/css/materialize.css' %}">
+			<!-- <link rel="stylesheet" href="{% static '/site/css/materialize.css' %}"> -->
 			<link rel="preconnect" href="https://fonts.gstatic.com">
 			<link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
 			<!--Import Google Icon Font-->
-			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">		
+			<!-- Compiled and minified CSS -->
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 			<!--Let browser know website is optimized for mobile-->
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>My Covid Tracker</title>
@@ -101,7 +103,8 @@
 					<label for="signup-password">Choose Password (minimum 6 characters)</label>
 				</div>
 				<div class="input-field">
-					<input class="validate" placeholder="Enter your age here" id="age" type="number" onkeypress="return onlyNumberKey(event)" min="1" max="125" oninput="this.value = truncate(this.value)">
+					<!-- <input class="validate" placeholder="Enter your age here" id="age" type="number" onkeypress="return onlyNumberKey(event)" min="1" max="125" oninput="this.value = truncate(this.value)"> -->
+					<input type="text" class="datepicker" id="dob" placeholder="Enter your date of birth" required>
 				</div>
 				<div>
 					<label for="sex">Select your sex:</label>
@@ -364,39 +367,39 @@
 							<div class="col s12 center-align">
 								<h5>Risk Factors</h5>
 							</div>
-							<div class="input-field col s12 m12 l4 offset-l4">
+							<div class="input-field col s6 m6 l4 offset-l4 offset-m3 offset-s3">
 								
 								<div>
 									<label for="contact" class="center-align">Select the risk level of the places you intend to go:</label>
 									<p>
 										<label>
 										  <input name="contact" type="radio" value="1" checked/>
-										  <span class="tooltipped"  data-position="right" data-tooltip="I plan to visit sparsely populated areas with open air or good ventilation.">Low</span>
+										  <span class="tooltipped"  data-position="top" data-tooltip="I plan to visit sparsely populated areas with open air or good ventilation.">Low</span>
 										</label>
 									</p>
 									<p>
 										<label>
 										  <input name="contact" type="radio" value="2"/>
-										  <span class="tooltipped"  data-position="right" data-tooltip="I plan to visit highly populated areas with open air or good ventilation or areas with poor ventilation that are sparsely populated.">Medium</span>
+										  <span class="tooltipped"  data-position="top" data-tooltip="I plan to visit highly populated areas with open air or good ventilation or areas with poor ventilation that are sparsely populated.">Medium</span>
 										</label>
 									</p>
 									<p>
 										<label>
 										  <input name="contact" type="radio" value="3"/>
-										  <span class="tooltipped"  data-position="right" data-tooltip="I plan to visit highly populated areas with poor ventilation.">High</span>
+										  <span class="tooltipped"  data-position="top" data-tooltip="I plan to visit highly populated areas with poor ventilation.">High</span>
 										</label>
 									</p>
 								</div>
 							</div>
-							<div class="input-field col s12 m12 l4 offset-l4">
+							<div class="input-field col s6 m6 l4 offset-l4 offset-m3 offset-s3">
 								<select multiple id="multi-select">
 								  <option value="" disabled selected>Select all that apply</option>
 								  <option value="1">I have loss of smell and taste</option>
 								  <option value="2">I have been experiencing severe fatigue</option>
 								  <option value="3">I have loss of appetite</option>
 								  <option value="4">I have a persistent cough</option>
-								  <option value="5">I have been vaccinated</option>
-								  <option value="6">I am immunocompromised</option>
+								  <option value="5">I am immunocompromised</option>
+								  <option value="6">I have been vaccinated</option>
 								</select>
 							</div>
 						</div>
@@ -411,6 +414,18 @@
 						<div class="row">
 							<div class="col s12 center-align">
 								<h5>Risk Assessment</h5>
+								<br>
+								<div class="preloader-wrapper big active" style="display: none;" id="loader">
+									<div class="spinner-layer spinner-teal-only">
+									  <div class="circle-clipper left">
+										<div class="circle"></div>
+									  </div><div class="gap-patch">
+										<div class="circle"></div>
+									  </div><div class="circle-clipper right">
+										<div class="circle"></div>
+									  </div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -457,11 +472,16 @@
 
 		<script>
 			$(document).ready(function(){
+				var today = new Date()
 				$('.sidenav').sidenav();
 				$('select').formSelect();
 				$('.tooltipped').tooltip();
 				$('.datepicker').datepicker({
-					format: 'yyyy-mm-dd'
+					format: 'yyyy-mm-dd',
+					minDate: new Date("1900-01-01T00:00:00"),
+					maxDate: today,
+					yearRange: [1900, today.getFullYear()],
+					showClearBtn: true
 				});
 			});	
 		</script>

@@ -50,6 +50,17 @@ function onlyNumberKey(evt) {
     return true; 
 } 
 
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 function setValue(uid) {
 	document.getElementById("submission").value = uid;
     var state = document.getElementById("state-select").value;
@@ -66,28 +77,47 @@ function setValue(uid) {
         opt = options[i];
 
         if (opt.selected) {
-            result.push(opt.value);
+            result.push(opt.value  || opt.text);
         }
     }
 
-	console.log(document.getElementById("submission").value);
-    console.log(state);
-    console.log(contact);
-    console.log(result.includes(1));
-    console.log(result.includes(2));
-    console.log(result.includes(3));
-    console.log(result.includes(4));
-    console.log(result.includes(5));
-    console.log(result.includes(6));
+    var userRef = db.collection('users').doc(uid);
+    userRef.get().then((doc) => {
+        var dob = doc.data().dob;
+        console.log(dob)
 
-    return db.collection('users').doc(uid).set({
-        state: state,
-        loss_of_smell_and_taste: result.includes(1),
-        persistent_cough: result.includes(4),
-        severe_fatigue: result.includes(2),
-        skipped_meals: result.includes(3),
-        level_of_contact: contact,
-        immuno_compromised: result.includes(5),
-        vaccinated: result.includes(6)
-    }, { merge: true });
+        var smell_taste = result.includes("1");
+        var fatigue = result.includes("2");
+        var appetite = result.includes("3");
+        var cough = result.includes("4");
+        var compromised = result.includes("5");
+        var vaccinated = result.includes("6");
+        var age = getAge(dob);
+    
+        console.log(document.getElementById("submission").value);
+        console.log(dob);
+        console.log(age);
+        console.log(state);
+        console.log(contact);
+        console.log(smell_taste);
+        console.log(fatigue);
+        console.log(appetite);
+        console.log(cough);
+        console.log(compromised);
+        console.log(vaccinated);
+
+        userRef.set({
+            state: state,
+            level_of_contact: contact,
+            loss_of_smell_and_taste: smell_taste,
+            severe_fatigue: fatigue,
+            skipped_meals: appetite,
+            persistent_cough: cough,
+            immuno_compromised: compromised,
+            vaccinated: vaccinated,
+            age: age,
+        }, { merge: true });
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    })
 }
