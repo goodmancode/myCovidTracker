@@ -20,7 +20,8 @@ signupForm.addEventListener('submit', (e) => {
     // store input
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
-    const age = signupForm['age'].value;
+    const dob = signupForm['dob'].value + "T00:00:00";
+    // const age = signupForm['age'].value;
     const sexCheck = document.querySelector('input[name="sex"]:checked').value;
     const sex = (sexCheck == 'true');
 
@@ -35,8 +36,9 @@ signupForm.addEventListener('submit', (e) => {
             risk_value: 0,
             risk_string: '',
             state: '',
-            age: age,
+            // age: age,
             sex: sex,
+            dob: dob,
             loss_of_smell_and_taste: false,
             persistent_cough: false,
             severe_fatigue: false,
