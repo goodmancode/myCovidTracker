@@ -46,7 +46,7 @@ signupForm.addEventListener('submit', (e) => {
             skipped_meals: false,
             level_of_contact: 0,
             immuno_compromised: false,
-            vaccinated: false
+            vaccinated: false,
         });
     }).then(() => {
         // console.log(cred.user)

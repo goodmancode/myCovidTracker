@@ -7,8 +7,14 @@ def index(request):
 	return render(request, 'index.html')
 
 def submit(request): 
-	uid = request.POST.get('submission')
-	submit_button.button(uid)
-			
+	#uid = request.POST.get('submission')
+	#submit_button.button(uid)
+	
+	if request.method == 'POST':
+		uid = request.POST.get('uid')
+		
+		submit_button.button(uid)
+		
+	return HttpResponse('')		
 	#return HttpResponse("""<html><script>window.location.replace('/');</script></html>""")
-	return render(request, 'index.html')
+	#return render(request, 'index.html')

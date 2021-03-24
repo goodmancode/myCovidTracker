@@ -182,7 +182,7 @@
 
 		<!-- account modal -->
 		<div id="modal-account" class="modal">
-			<div class="modal-content center-align">
+			<div class="modal-content">
 				<h4>Account details</h4>
 				<hr>
 				<br>
@@ -361,16 +361,17 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<h5 class="logged-out center-align">Please<a href="#" onclick="$('#modal-login').modal('open');"> Login </a> or <a href="#" onclick="$('#modal-signup').modal('open');"> Sign Up </a>for Risk Assessment</h5>
+				<div class="row logged-in">
 					<div class="col s12 m12 l6">
 						<div class="row">
-							<div class="col s12 center-align">
+							<div class="col s12 center-align logged-in">
 								<h5>Risk Factors</h5>
 							</div>
 							<div class="input-field col s6 m6 l4 offset-l4 offset-m3 offset-s3">
 								
 								<div>
-									<label for="contact" class="center-align">Select the risk level of the places you intend to go:</label>
+									<label for="contact">Select the risk level of the places you intend to go:</label>
 									<p>
 										<label>
 										  <input name="contact" type="radio" value=0 checked/>
@@ -392,21 +393,55 @@
 								</div>
 							</div>
 							<div class="input-field col s6 m6 l4 offset-l4 offset-m3 offset-s3">
-								<select multiple id="multi-select">
-								  <option value="" disabled selected>Select all that apply</option>
-								  <option value="1">I have loss of smell and taste</option>
-								  <option value="2">I have been experiencing severe fatigue</option>
-								  <option value="3">I have loss of appetite</option>
-								  <option value="4">I have a persistent cough</option>
-								  <option value="5">I am immunocompromised</option>
-								  <option value="6">I have been vaccinated</option>
-								</select>
+							<p>Select all that apply:</p>
+								<p>
+								<label>
+									<input id="1" class="multi-select" type="checkbox"value="1" />
+									<span>I have loss of smell and taste</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="2" class="multi-select" type="checkbox" value="2" />
+									<span>I have been experiencing severe fatigue</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="3" class="multi-select" type="checkbox" value="3" />
+									<span>I have loss of appetite</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="4" class="multi-select" type="checkbox" value="4" />
+									<span>I have a persistent cough</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="5" class="multi-select" type="checkbox" value="5" />
+									<span>I am immunocompromised</span>
+								</label>
+								</p>
+								<p>
+								<label>
+									<input id="6" class="multi-select" type="checkbox" value="6" />
+									<span>I have been vaccinated</span>
+								</label>
+								</p>
 							</div>
 						</div>
 						<div class="container center-align">
-							<form action="/submit/" method="post">
+							<form id="todjango">
 								{% csrf_token %}
-								<button class="btn" onclick="setValue(auth.currentUser.uid)" value="" id="submission" name="submission" type="submit">Submit</button>
+								<button class="btn" onclick=
+								"setValue(auth.currentUser.uid);
+								document.getElementById('loader').style.display='block';
+								document.getElementById('risk-container').style.display='none';
+								getRiskAssessment(auth.currentUser.uid);
+								M.toast({html: 'Risk Factors sent. Please wait...', displayLength: 1000});" 
+								value="" id="submission" name="submission">Submit</button>
 							</form>
 						</div>					
 					</div>
@@ -414,15 +449,25 @@
 						<div class="row">
 							<div class="col s12 center-align">
 								<h5>Risk Assessment</h5>
-								<br>
-								<div class="preloader-wrapper big active" style="display: none;" id="loader">
-									<div class="spinner-layer spinner-teal-only">
-									  <div class="circle-clipper left">
-										<div class="circle"></div>
-									  </div><div class="gap-patch">
-										<div class="circle"></div>
-									  </div><div class="circle-clipper right">
-										<div class="circle"></div>
+								<div class="container center-align" style="display: none;" id="loader">
+									<br><br>
+									<div class="preloader-wrapper big active center-align" >
+										<div class="spinner-layer spinner-teal-only">
+										  <div class="circle-clipper left">
+											<div class="circle"></div>
+										  </div><div class="gap-patch">
+											<div class="circle"></div>
+										  </div><div class="circle-clipper right">
+											<div class="circle"></div>
+										  </div>
+										</div>
+									</div>
+								</div>
+								<div class="col s6 m6 l8 offset-l2 offset-m3 offset-s3" style="display: none;" id="risk-container">
+									<br>
+									<div class="risk" id="risk-color" style="height: 15rem;">
+										<br>
+										<h6 id="risk-assessment"></h6>
 									  </div>
 									</div>
 								</div>
@@ -483,7 +528,21 @@
 					yearRange: [1900, today.getFullYear()],
 					showClearBtn: true
 				});
-			});	
+			});
+			
+			$(document).on('submit', '#todjango', function(e) {
+				e.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/submit/',
+					data: {
+						uid: $('#submission').val(),
+						csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+					},
+				});
+			});
+
 		</script>
 	</main></body>
 	<footer class="page-footer teal">

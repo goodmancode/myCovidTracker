@@ -6,7 +6,11 @@ const setupUI = (user) => {
     if (user) {
         db.collection('users').doc(user.uid).get().then(doc => {
             details.innerHTML = `
-              <div>${doc.data().email}</div>
+              <div>
+                <p>Email: ${doc.data().email}</p>
+                <p>Age: ${doc.data().age}</p>
+              </div>
+
             `;
           });
 
@@ -61,36 +65,27 @@ function getAge(dateString) {
     return age;
 }
 
+function getColor(value){
+    //value from 0 to 1
+    var hue=((1-value)*120).toString(10);
+    return ["hsl(",hue,",100%,50%)"].join("");
+}
+
 function setValue(uid) {
 	document.getElementById("submission").value = uid;
     const state = document.getElementById("state-select").value;
     const contact = Number(document.querySelector('input[name="contact"]:checked').value);
 
-    // Fills result array with the selected option values
-    var multi = document.getElementById("multi-select");
-
-    var result = [];
-    var options = multi && multi.options;
-    var opt;
-
-    for (var i = 0, iLen=options.length; i<iLen; i++) {
-        opt = options[i];
-
-        if (opt.selected) {
-            result.push(opt.value  || opt.text);
-        }
-    }
-
     var userRef = db.collection('users').doc(uid);
     userRef.get().then((doc) => {
 
         const dob = doc.data().dob;
-        const smell_taste = result.includes("1");
-        const fatigue = result.includes("2");
-        const appetite = result.includes("3");
-        const cough = result.includes("4");
-        const compromised = result.includes("5");
-        const vaccinated = result.includes("6");
+        const smell_taste = document.getElementById('1').checked;
+        const fatigue = document.getElementById('2').checked;
+        const appetite = document.getElementById('3').checked;
+        const cough = document.getElementById('4').checked;
+        const compromised = document.getElementById('5').checked;
+        const vaccinated = document.getElementById('6').checked;
         const age = getAge(dob);
     
         console.log(document.getElementById("submission").value);
@@ -119,4 +114,17 @@ function setValue(uid) {
     }).catch((error) => {
         console.log("Error getting document:", error);
     })
+}
+
+function getRiskAssessment(uid) {
+    db.collection('users').doc(uid).onSnapshot(doc => {
+        setTimeout(() => {
+            
+        }, 1000);
+        document.getElementById("risk-assessment").innerHTML = doc.data().risk_string;
+        document.getElementById("loader").style.display = 'none';
+        document.getElementById("risk-container").style.display = 'block';
+        document.getElementById("risk-color").style.backgroundColor = getColor(doc.data().risk_value);
+        document.getElementById("risk-color2").style.backgroundColor = getColor(doc.data().risk_value);
+    });
 }
