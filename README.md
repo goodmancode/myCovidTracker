@@ -171,7 +171,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Sairam - U009, ER diagrams
 - Steve - U040, Database, Design Document
 
-# Sprint 7
+# Sprint 8
 - [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
     - Product Backlog
     - Sprint Backlog
@@ -190,7 +190,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 
 
 ## Task Allocation
-- Robinson - Final Integration, VPS integration, Powerpoint slides, class diagrams
+- Robinson - Final Integration, VPS integration, Powerpoint slides, Final Demonstration, class diagrams
 - Jacob - U041, PowerPoint slides, C4 diagrams, Interface diagram
 - Sairam -Final Integration, PowerPoint slides, ER diagrams
 - Steve - U017, DJango/Database integration, PowerPoint Slides, Design Document
