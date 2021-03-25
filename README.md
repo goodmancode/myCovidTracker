@@ -157,8 +157,8 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - [Velocity Chart](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_7/velocity_chart.png)
 - Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
 - [System Architecture](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/architecture.md)
-- [Frontend source code](https://github.com/goodmancode/myCovidTracker/tree/main/site)
-- [Backend source code](https://github.com/goodmancode/myCovidTracker/tree/main/backend)
+- [Frontend source code](https://github.com/goodmancode/myCovidTracker/tree/main/mycovidtracker/static)
+- [Backend source code](https://github.com/goodmancode/myCovidTracker/tree/main/mycovidtracker/mycovidtracker)
 - [Frontend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/frontend_tests)
 - [Backend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/backend_tests)
 - [Model analysis](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_7/hyper_parameter_results.md)
@@ -170,3 +170,27 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - Jacob - U023, U039, C4 diagrams, Interface diagram
 - Sairam - U009, ER diagrams
 - Steve - U040, Database, Design Document
+
+# Sprint 7
+- [Trello Board](https://trello.com/b/3QTsLqqv/myflorida-covid-tracker)
+    - Product Backlog
+    - Sprint Backlog
+    - Requirements
+    - Effort & Priority
+    - etc.
+- [Burndown Chart](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_7/burndown_chart.png)
+- [Velocity Chart](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_7/velocity_chart.png)
+- Live document for Velocity and Burndown Charts on [Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vQt66GjR-ZmbCdLRKrfZVDMOkI8WkiyewuhxiB8_Nrhcyi6Q8tfzCom80mU3BLDxfCw0S9t5fkJ6O6N/pubhtml)
+- [System Architecture](https://github.com/goodmancode/myCovidTracker/blob/main/architecture/architecture.md)
+- [Frontend source code](https://github.com/goodmancode/myCovidTracker/tree/main/mycovidtracker/static)
+- [Backend source code](https://github.com/goodmancode/myCovidTracker/tree/main/mycovidtracker/mycovidtracker)
+- [Frontend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/frontend_tests)
+- [Backend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/backend_tests)
+- [Model analysis](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_7/hyper_parameter_results.md)
+
+
+## Task Allocation
+- Robinson - Final Integration, VPS integration, Powerpoint slides, class diagrams
+- Jacob - U041, PowerPoint slides, C4 diagrams, Interface diagram
+- Sairam -Final Integration, PowerPoint slides, ER diagrams
+- Steve - U017, DJango/Database integration, PowerPoint Slides, Design Document
