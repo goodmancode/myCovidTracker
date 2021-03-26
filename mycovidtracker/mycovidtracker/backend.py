@@ -1,4 +1,4 @@
-import json, os, requests, time, firebase_admin, sys
+import json, os, requests, time, firebase_admin, sys, firebase_admin
 from urllib.error import HTTPError
 from datetime import datetime, timedelta
 from firebase_admin import credentials, initialize_app, storage, firestore
