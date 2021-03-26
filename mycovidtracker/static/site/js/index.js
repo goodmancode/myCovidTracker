@@ -130,3 +130,23 @@ function getRiskAssessment(uid) {
         document.getElementById("risk-color2").style.backgroundColor = getColor(doc.data().risk_value);
     });
 }
+
+function button(uid) {
+    if (document.getElementById('state-select').value == "")
+    {
+        M.toast({html: 'Please select a state for Risk Assessment', displayLength: 1000});
+    }
+    else if (Number(document.getElementById('travel-time').value) > 30 || Number(document.getElementById('travel-time').value) < 1)
+    {
+        M.toast({html: 'Please enter a number from 1 to 30', displayLength: 1000});
+    }
+    else
+    {
+        setValue(uid);
+        document.getElementById('loader').style.display='block';
+        document.getElementById('risk-container').style.display='none';
+        M.toast({html: 'Risk Factors sent. Please wait...', displayLength: 1000});
+        getRiskAssessment(uid);
+    }
+        
+}
