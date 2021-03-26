@@ -199,7 +199,7 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s6 offset-s3">
-								<select id="state-select" name="state-select" class="browser-default z-depth-1">
+								<select id="state-select" name="state-select" value="" class="browser-default z-depth-1">
 									<option value="" disabled selected>Choose a state</option>
 									<option value="Alabama">Alabama</option>
 									<option value="Alaska">Alaska</option>
@@ -366,8 +366,15 @@
 							<div class="col s12 center-align logged-in">
 								<h5>Risk Factors</h5>
 							</div>
+							<div class="col s6 m6 l4 offset-l4 offset-m3 offset-s3"">
+								<div class="input-field">
+									<label for="travel-time">Enter the amount of days you plan to travel to the given state:</label>
+									<br>
+									<input class="validate" placeholder="Enter a number from 1 to 30" value=1 id="travel-time" type="number" onkeypress="return onlyNumberKey(event)" min="1" max="30" oninput="this.value = truncate(this.value)">
+									<span class="helper-text" data-error="Please enter a number from 1 to 30" data-success="">You may only enter numerical characters.</span>
+								</div>
+							</div>
 							<div class="input-field col s6 m6 l4 offset-l4 offset-m3 offset-s3">
-								
 								<div>
 									<label for="contact">Select the risk level of the places you intend to go:</label>
 									<p>
@@ -431,15 +438,11 @@
 							</div>
 						</div>
 						<div class="container center-align">
-							<form id="todjango">
+							<form id="todjango" action="/submit/">
 								{% csrf_token %}
 								<button class="btn" onclick=
-								"setValue(auth.currentUser.uid);
-								document.getElementById('loader').style.display='block';
-								document.getElementById('risk-container').style.display='none';
-								getRiskAssessment(auth.currentUser.uid);
-								M.toast({html: 'Risk Factors sent. Please wait...', displayLength: 1000});" 
-								value="" id="submission" name="submission">Submit</button>
+								"button(auth.currentUser.uid)"
+								value="" id="submission" name="submission" type="submit">Submit</button>
 							</form>
 						</div>					
 					</div>
