@@ -1,20 +1,25 @@
-import json, schedule, os, requests, time, firebase_admin
-from urllib.error import HTTPError
+import json, schedule, os, requests, time, firebase_admin, sys, os
 
+from urllib.error import HTTPError
 from datetime import datetime, timedelta
 from firebase_admin import credentials, initialize_app, storage, firestore
-from get_retrain_days import get_retrain_time, post_new_retrain_time
-from model import regression
-from State import State
-from StateMetrics import StateMetrics
-from RiskAssessment import RiskAssessment
+
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
+from mycovidtracker.get_retrain_days import get_retrain_time, post_new_retrain_time
+from mycovidtracker.model import regression
+from mycovidtracker.State import State
+from mycovidtracker.StateMetrics import StateMetrics
+from mycovidtracker.RiskAssessment import RiskAssessment
 
 import numpy as np
 import pandas as pd
 
 def send_state_info_to_database(state_data):
     # Getting credentials to access database
-    cred = credentials.Certificate('/root/mycovidtracker/static/service.json')
+    cred = credentials.Certificate('service.json')
 
     # Ensures that firebase has not already been started
     if not firebase_admin._apps:
@@ -33,7 +38,7 @@ def send_state_info_to_database(state_data):
 
 def send_risk_to_database(uid):
     # Getting credentials to access database
-    cred = credentials.Certificate('/root/mycovidtracker/static/service.json')
+    cred = credentials.Certificate('service.json')
 
     # Ensures that firebase has not already been started
     if not firebase_admin._apps:
@@ -86,7 +91,7 @@ def send_risk_to_database(uid):
     return
 
 def send_json_to_database(filename):
-    cred = credentials.Certificate('/root/mycovidtracker/static/service.json')
+    cred = credentials.Certificate('service.json')
     initialized = firebase_admin._apps
 
     if not initialized:

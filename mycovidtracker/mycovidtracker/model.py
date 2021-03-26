@@ -1,11 +1,16 @@
 import pandas as pd
 import numpy as np
-import datetime, json, math, os, pickle, requests, time
+import matplotlib.pyplot as plt
 import seaborn as sns
+import datetime, json, math, os, pickle, requests, time, sys
 
-from get_retrain_days import get_retrain_time, post_new_retrain_time
-from StateMetrics import StateMetrics
-from State import State
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
+from mycovidtracker.get_retrain_days import get_retrain_time, post_new_retrain_time
+from mycovidtracker.StateMetrics import StateMetrics
+from mycovidtracker.State import State
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge, Lasso, LinearRegression, ElasticNet
@@ -13,7 +18,6 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
-import matplotlib.pyplot as plt
 from matplotlib import style
 
 # List of states

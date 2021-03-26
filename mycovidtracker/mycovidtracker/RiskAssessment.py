@@ -1,5 +1,5 @@
-import StateMetrics
 import numpy as np
+from mycovidtracker.StateMetrics import StateMetrics
 
 class RiskAssessment:
     risk_value = None
