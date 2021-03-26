@@ -55,6 +55,7 @@ def send_risk_to_database(uid):
     state = str(fields['state'])
 
     # Setting fields for risk assessment
+    days_out = fields['days_out']
     age = fields['age']
     sex = fields['sex']
     loss_of_smell_and_taste = fields['loss_of_smell_and_taste']
@@ -68,7 +69,7 @@ def send_risk_to_database(uid):
 
     state_metrics = state_info.get().to_dict()
 
-    metrics = StateMetrics(state_metrics['predictions'], state_metrics['avg_cases_per_day'], state_metrics['model_accuracy'], state_metrics['percent_change'])
+    metrics = StateMetrics(state_metrics['predictions'], state_metrics['avg_cases_per_day'], state_metrics['model_accuracy'], state_metrics['percent_change'], days_out)
 
     risk = RiskAssessment(age, sex, loss_of_smell_and_taste, persistent_cough, severe_fatigue, skipped_meals, level_of_contact, immuno_compromised, vaccinated, metrics)
     risk_value, risk_string = risk.risk_assessment()
@@ -187,8 +188,3 @@ def refresh_data():
 if __name__ == '__main__':
     api_call()
     refresh_data()
-<<<<<<< HEAD
-    send_risk_to_database('GvKW18YjLaYrCeAFp8zp40EJhKk1')
-=======
-    #send_risk_to_database('GvKW18YjLaYrCeAFp8zp40EJhKk1')
->>>>>>> 142b038864f2e3ba4dc7c08064ff63b0d443a81e
