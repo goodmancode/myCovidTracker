@@ -18,7 +18,7 @@ import pandas as pd
 
 def send_state_info_to_database(state_data):
     # Getting credentials to access database
-    cred = credentials.Certificate('service.json')
+    cred = credentials.Certificate('/root/mycovidtracker/mycovidtracker/service.json')
 
     # Ensures that firebase has not already been started
     if not firebase_admin._apps:
@@ -37,7 +37,7 @@ def send_state_info_to_database(state_data):
 
 def send_risk_to_database(uid):
     # Getting credentials to access database
-    cred = credentials.Certificate('service.json')
+    cred = credentials.Certificate('/root/mycovidtracker/mycovidtracker/service.json')
 
     # Ensures that firebase has not already been started
     if not firebase_admin._apps:
@@ -64,7 +64,7 @@ def send_risk_to_database(uid):
     level_of_contact = fields['level_of_contact']
     immuno_compromised = fields['immuno_compromised']
     vaccinated = fields['vaccinated']
-    state_info = db.collection('states').document(state)
+    state_info = db.collection(u'states').document(state)
 
     state_metrics = state_info.get().to_dict()
 
@@ -90,7 +90,7 @@ def send_risk_to_database(uid):
     return
 
 def send_json_to_database(filename):
-    cred = credentials.Certificate('service.json')
+    cred = credentials.Certificate('/root/mycovidtracker/mycovidtracker/service.json')
     initialized = firebase_admin._apps
 
     if not initialized:
@@ -187,3 +187,4 @@ def refresh_data():
 if __name__ == '__main__':
     api_call()
     refresh_data()
+    #send_risk_to_database('GvKW18YjLaYrCeAFp8zp40EJhKk1')
