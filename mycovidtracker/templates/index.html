@@ -536,15 +536,21 @@
 			
 			$(document).on('submit', '#todjango', function(e) {
 				e.preventDefault();
+				
+				setTimeout(() => {
+						
+					$.ajax({
+						type: 'POST',
+						url: '/submit/',
+						data: {
+							uid: $('#submission').val(),
+							csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+						},
+					});
 
-				$.ajax({
-					type: 'POST',
-					url: '/submit/',
-					data: {
-						uid: $('#submission').val(),
-						csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-					},
-				});
+        		}, 1000); 
+
+				getRiskAssessment($('#submission').val())
 			});
 
 		</script>

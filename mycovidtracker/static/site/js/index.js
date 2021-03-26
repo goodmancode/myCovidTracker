@@ -120,14 +120,12 @@ function setValue(uid) {
 
 function getRiskAssessment(uid) {
     db.collection('users').doc(uid).onSnapshot(doc => {
-        setTimeout(() => {
-            
-        }, 1000);
         document.getElementById("risk-assessment").innerHTML = doc.data().risk_string;
         document.getElementById("loader").style.display = 'none';
         document.getElementById("risk-container").style.display = 'block';
         document.getElementById("risk-color").style.backgroundColor = getColor(doc.data().risk_value);
         document.getElementById("risk-color2").style.backgroundColor = getColor(doc.data().risk_value);
+
     });
 }
 
@@ -145,8 +143,7 @@ function button(uid) {
         setValue(uid);
         document.getElementById('loader').style.display='block';
         document.getElementById('risk-container').style.display='none';
-        M.toast({html: 'Risk Factors sent. Please wait...', displayLength: 1000});
-        getRiskAssessment(uid);
+        M.toast({html: 'Risk Factors sent. Please wait...', displayLength: 1000}); 
     }
         
 }
