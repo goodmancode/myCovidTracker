@@ -33,6 +33,7 @@ def send_state_info_to_database(state_data):
             u'avg_cases_per_day': state.metrics.avg_cases_per_day,
             u'model_accuracy': state.metrics.model_accuracy,
             u'percent_change': state.metrics.percent_change.tolist(),
+            u'predicted_percent_change': state.metrics.calculate_prediction_percent_change()
         }, merge = True)
 
 def send_risk_to_database(uid):
