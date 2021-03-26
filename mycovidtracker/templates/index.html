@@ -433,7 +433,7 @@
 							</div>
 						</div>
 						<div class="container center-align">
-							<form id="todjango">
+							<form id="todjango" action="/submit/">
 								{% csrf_token %}
 								<button class="btn" onclick=
 								"setValue(auth.currentUser.uid);
@@ -441,7 +441,7 @@
 								document.getElementById('risk-container').style.display='none';
 								getRiskAssessment(auth.currentUser.uid);
 								M.toast({html: 'Risk Factors sent. Please wait...', displayLength: 1000});" 
-								value="" id="submission" name="submission">Submit</button>
+								value="" id="submission" name="submission" type="submit">Submit</button>
 							</form>
 						</div>					
 					</div>
@@ -548,7 +548,7 @@
 	<footer class="page-footer teal">
 		<div class="container" style="width: 98%; max-width:1920px;">
 			<div class="row">
-				<p>© 2021 MyCovidTracker</p>
+				<p>Â© 2021 MyCovidTracker</p>
 			</div>
 		</div>
 	</footer>

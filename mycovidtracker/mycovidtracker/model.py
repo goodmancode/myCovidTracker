@@ -101,7 +101,8 @@ def regression(days_since_last_retrain):
     dir_path = os.path.dirname(os.path.realpath(__file__)) + '/pickle_files/'
 
     # Dataset should be stored locally only if the request was successful
-    df = pd.read_csv('dataset.csv')
+    dataset_path = os.path.dirname(os.path.realpath(__file__)) + '/dataset.csv'
+    df = pd.read_csv(dataset_path)
 
     # Getting rid of anything that's not any of the 50 states
     df = df[(df.state != 'DC') & (df.state != 'FSM') & (df.state != 'GU') &
