@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 function truncate(value) {
-    if (value.length > 3) {
-        value = value.slice(0, 3);
+    if (value.length > 2) {
+        value = value.slice(0, 2);
     }
     return value;
 }
@@ -86,6 +86,7 @@ function setValue(uid) {
         const cough = document.getElementById('4').checked;
         const compromised = document.getElementById('5').checked;
         const vaccinated = document.getElementById('6').checked;
+        const traveltime = Number(document.getElementById('travel-time').value);
         const age = getAge(dob);
     
         console.log(document.getElementById("submission").value);
@@ -110,6 +111,7 @@ function setValue(uid) {
             immuno_compromised: compromised,
             vaccinated: vaccinated,
             age: age,
+            days_out: traveltime,
         }, { merge: true });
     }).catch((error) => {
         console.log("Error getting document:", error);
