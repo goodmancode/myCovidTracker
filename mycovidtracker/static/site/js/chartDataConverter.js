@@ -73,6 +73,7 @@ async function setForecastData() {
 
 // Use this function to grab chart data
 function generateStateChartData(state, start_date, end_date) {
+    document.getElementById("chart-missing").style.display = "none";
     var state_historical_data = getStateSpecificHistorical(state, historicalCovidData, start_date, end_date);
     var state_forecast_data = getStateSpecificForecast(state, forecastData, start_date, end_date);
     state_forecast_data.unshift(state_historical_data[0]);
