@@ -220,7 +220,7 @@ def regression(days_since_last_retrain):
             df_filtered.loc[next_date] = [np.nan for _ in range(len(df_filtered.columns) - 1)] + [j]
 
         # Create new instantiation of StateMetrics class
-        metrics = StateMetrics(forecast_set, avg_cases_per_day, score, daily_pct_change)
+        metrics = StateMetrics(forecast_set, avg_cases_per_day, score, daily_pct_change, None)
 
         # Create new instantiation of State class
         state_objects.append(State(state, metrics))
