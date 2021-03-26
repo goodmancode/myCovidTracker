@@ -35,7 +35,7 @@ class RiskAssessment:
     def risk_from_predicted_cases(self):
         days_out = self.state_metrics.days_out
         pct_change = np.array(self.state_metrics.get_percent_change())
-        forecast_pct_change = (np.array(self.state_metrics.predictions[days_out]) - np.array(self.state_metrics.predictions[0])) / np.array(self.state_metrics.predictions[0]) * 100.0
+        forecast_pct_change = self.state_metrics.calculate_prediction_percent_change()
         avg_pct_change = (sum(pct_change / len(self.state_metrics.get_percent_change()))) * 100.0
 
         if ((avg_pct_change - forecast_pct_change) > 0):

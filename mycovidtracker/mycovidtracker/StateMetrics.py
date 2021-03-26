@@ -28,3 +28,9 @@ class StateMetrics:
 
     def predict_days_out(self, days):
         return self.predictions[:days]
+
+    def calculate_prediction_percent_change(self):
+        new = self.days_out - 1
+        old = 0
+
+        return ((self.predictions[new] - self.predictions[old]) / self.predictions[old]) * 100.0
