@@ -176,7 +176,7 @@ def refresh_data():
     days_since_last_retrain += 1
 
     if (days_since_last_retrain >= 15):
-        days_since_last_refresh = 1
+        days_since_last_retrain = 1
 
     post_new_retrain_time(days_since_last_retrain)
 
