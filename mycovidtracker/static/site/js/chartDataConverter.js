@@ -78,9 +78,9 @@ async function setForecastData() {
     forecastData = data;
 }
 
-async function getLastUpdatedDateAsString() {
+async function setLastCreatedDateAsString() {
     var metadata = await pullMetadata();
-    var date = new Date(metadata.updated).toUTCString();
+    var date = new Date(metadata.timeCreated).toUTCString();
     document.getElementById("updated-date").innerHTML = date;
 }
 
