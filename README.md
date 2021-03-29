@@ -190,7 +190,7 @@ Our product will be for any resident or visitor of the United States (US) who wi
 - [Frontend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/frontend_tests)
 - [Backend tests](https://github.com/goodmancode/myCovidTracker/tree/main/artifacts/tests/backend_tests)
 - [Model analysis](https://github.com/goodmancode/myCovidTracker/blob/main/artifacts/sprint_7/hyper_parameter_results.md)
-- [Final Demonstration](https://youtu.be/CxBvscL7I2U)
+- [Final Demonstration](https://youtu.be/UZA3G71LqKU)
 
 
 ## Task Allocation
