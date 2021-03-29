@@ -16,7 +16,7 @@ test('test that signup cannot occur without input', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#signupm', elem => elem.click());
@@ -40,12 +40,14 @@ test('test that signup cannot occur with an invalid email address', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#signupm', elem => elem.click());
     await page.type('input#signup-email', 'test');
     await page.type('input#signup-password', 'test12');
+    await page.type('input#dob', '1990-01-01');
+    
     await page.$eval('button#signup-button', elem => elem.click());
 
     // checks that no user is logged in
@@ -66,12 +68,14 @@ test('test that signup cannot occur with an invalid password', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#signupm', elem => elem.click());
     await page.type('input#signup-email', 'testmobile@example.com');
     await page.type('input#signup-password', 'test');
+    await page.type('input#dob', '1990-01-01');
+    
     await page.$eval('button#signup-button', elem => elem.click());
 
     // checks that no user is logged in
@@ -92,16 +96,46 @@ test('test that signup cannot occur with an email that is in use', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#signupm', elem => elem.click());
     await page.type('input#signup-email', 'taken@example.com');
     await page.type('input#signup-password', 'test12');
+    await page.type('input#dob', '1990-01-01');
+    
     await page.$eval('button#signup-button', elem => elem.click());
 
     // checks that no user is logged in
     expect(firebase.auth.Currentuser).toBeFalsy;
+
+    await page.waitForTimeout(1000);
+    await browser.close();
+})
+
+test('test that signup cannot occur without date of birth', async () =>{
+    jest.setTimeout(3000000);
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo: 25,
+        args: ['--start-maximized']
+    })
+
+    const page = await browser.newPage();
+    await page.setViewport({ width: 800, height: 600});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
+
+    await page.$eval('a#sidemenu', elem => elem.click());
+    await page.$eval('a#signupm', elem => elem.click());
+    await page.type('input#signup-email', 'testmobile@example.com');
+    await page.type('input#signup-password', 'test12');
+    
+    await page.$eval('button#signup-button', elem => elem.click());
+    
+    // checks that no user is logged in
+    expect(firebase.auth.Currentuser).toBeFalsy;
+    
+    await page.$eval('a#logout', elem => elem.click());
 
     await page.waitForTimeout(1000);
     await browser.close();
@@ -118,16 +152,18 @@ test('test proper signup functionality and logout', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#signupm', elem => elem.click());
     await page.type('input#signup-email', 'testmobile@example.com');
     await page.type('input#signup-password', 'test12');
+    await page.type('input#dob', '1990-01-01');
+    
     await page.$eval('button#signup-button', elem => elem.click());
     
     // checks that a user is logged in
-    expect(firebase.auth.Currentuser).toBeFalsy;
+    expect(firebase.auth.Currentuser).toBeTruthy;
     
     await page.$eval('a#logout', elem => elem.click());
 
@@ -146,7 +182,7 @@ test('test that login cannot occur with no input', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
@@ -170,7 +206,7 @@ test('test that login cannot occur without a proper email address', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
@@ -196,7 +232,7 @@ test('test that login cannot occur with an incorrect password', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
@@ -223,7 +259,7 @@ test('test proper login functionality and logout', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
@@ -251,7 +287,7 @@ test('test that passwords cannot be reset with no input', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
@@ -273,7 +309,7 @@ test('test that passwords cannot be reset with an unregistered email address', a
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
@@ -296,7 +332,7 @@ test('test proper password reset functionality', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
@@ -319,7 +355,7 @@ test('test that accounts cannot be deleted without proper authentication', async
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
@@ -347,7 +383,7 @@ test('test proper account deletion functionality', async () =>{
 
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 600});
-    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/site/index.html')}`, {waitUntil: 'load'});
+    await page.goto(`file:${path.join(__dirname, '..', '..', '..', '/mycovidtracker/static/site/test.html')}`, {waitUntil: 'load'});
 
     await page.$eval('a#sidemenu', elem => elem.click());
     await page.$eval('a#loginm', elem => elem.click());
