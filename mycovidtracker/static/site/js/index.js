@@ -120,12 +120,88 @@ function setValue(uid) {
 
 function getRiskAssessment(uid) {
     db.collection('users').doc(uid).onSnapshot(doc => {
-        document.getElementById("risk-assessment").innerHTML = doc.data().risk_string;
+        riskAssessment.innerHTML = `${doc.data().risk_string}`
+        riskAge.innerHTML = `You are ${doc.data().age} years old.`;
+        if (doc.data().sex == true)
+        {
+            riskSex.innerHTML = `You are male.`
+        }
+        else
+        {
+            riskSex.innerHTML = `You are female.`
+        }
+        riskState.innerHTML = `You are heading to ${doc.data().state}.`
+        if (doc.data().level_of_contact == 0)
+        {
+            riskLevel.innerHTML = `You intend to go to low risk areas.`
+        }
+        else if (doc.data().level_of_contact == 1)
+        {
+            riskLevel.innerHTML = `You intend to go to moderate risk areas.`
+        }
+        else
+        {
+            riskLevel.innerHTML = `You intend to go to high risk areas.`
+        }
+        if (doc.data().loss_of_smell_and_taste == true)
+        {
+            riskTaste.innerHTML = `You have loss of smell and taste.`
+        }
+        else
+        {
+            riskTaste.innerHTML = `You do not have loss of smell and taste.`
+        }
+        if (doc.data().severe_fatigue == true)
+        {
+            riskFatigue.innerHTML = `You are experiencing severe fatigue.`
+        }
+        else
+        {
+            riskFatigue.innerHTML = `You are not experiencing severe fatigue.`
+        }
+        if (doc.data().persistent_cough == true)
+        {
+            riskCough.innerHTML = `You have a persistent cough.`
+        }
+        else
+        {
+            riskCough.innerHTML = `You do not have a persistent cough.`
+        }
+        if (doc.data().immuno_compromised == true)
+        {
+            riskImmuno.innerHTML = `You are immunocompromised.`
+        }
+        else
+        {
+            riskImmuno.innerHTML = `You are not immunocompromised.`
+        }
+        if (doc.data().vaccinated == true)
+        {
+            riskVaccinated.innerHTML = `You have been vaccinated.`
+        }
+        else
+        {
+            riskVaccinated.innerHTML = `You have not been vaccinated.`
+        }
+        if (doc.data().skipped_meals == true)
+        {
+            riskAppetite.innerHTML = `You have loss of appetite.`
+        }
+        else
+        {
+            riskAppetite.innerHTML = `You do not have loss of appetite.`
+        }
+
         document.getElementById("loader").style.display = 'none';
         document.getElementById("risk-container").style.display = 'block';
-        document.getElementById("risk-color").style.backgroundColor = getColor(doc.data().risk_value);
-        document.getElementById("risk-color2").style.backgroundColor = getColor(doc.data().risk_value);
+        
+        document.getElementById("riskColor").style.backgroundColor = getColor(doc.data().risk_value);
+        document.getElementById("gauge-fill").style.backgroundColor = getColor(doc.data().risk_value);
+        
+        const gaugeElement = document.querySelector(".gauge");
+        setGaugeValue(gaugeElement, doc.data().risk_value);
 
+        return doc.data().risk_value;
     });
 }
 

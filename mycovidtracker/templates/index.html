@@ -104,7 +104,7 @@
 				</div>
 				<div class="input-field">
 					<!-- <input class="validate" placeholder="Enter your age here" id="age" type="number" onkeypress="return onlyNumberKey(event)" min="1" max="125" oninput="this.value = truncate(this.value)"> -->
-					<input type="text" class="datepicker" id="dob" placeholder="Enter your date of birth" required>
+					<input type="text" class="datepicker" id="dob" placeholder="Enter your date of birth in yyyy-mm-dd format or select from the calendar." required>
 				</div>
 				<div>
 					<label for="sex">Select your sex:</label>
@@ -473,10 +473,32 @@
 								</div>
 								<div class="col s6 m6 l8 offset-l2 offset-m3 offset-s3" style="display: none;" id="risk-container">
 									<br>
-									<div class="risk" id="risk-color" style="height: 15rem;">
+									<div class="container center-align">
+										<div class="gauge">
+											<div class="gauge-body">
+											  <div class="gauge-fill" id="gauge-fill"></div>
+											  <div class="gauge-cover" id="gauge-cover"></div>
+											</div>
+										  </div>
+									</div>
+									  <br>
+									<div class="risk" id="riskColor">
 										<br>
-										<h6 id="risk-assessment"></h6>
-									  </div>
+										<h6 id="riskAssessment"></h6>
+										<br>
+										<p>Assessment based on the following factors: </p>
+										<li id="riskAge"></li>
+										<li id="riskSex"></li>
+										<li id="riskState"></li>
+										<li id="riskLevel"></li>
+										<li id="riskTaste"></li>
+										<li id="riskFatigue"></li>
+										<li id="riskAppetite"></li>
+										<li id="riskCough"></li>
+										<li id="riskImmuno"></li>
+										<li id="riskVaccinated"></li>
+										<br>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -538,6 +560,19 @@
 				});
 				getLastUpdatedDateAsString();
 			});
+
+			function setGaugeValue(gauge, value) {
+					if (value < 0 || value > 1) {
+						return;
+					}
+
+					gauge.querySelector(".gauge-fill").style.transform = `rotate(${
+						value / 2
+					}turn)`;
+					/*gauge.querySelector(".gauge-cover").textContent = `${Math.round(
+						value * 100
+					)}%`;*/
+					}
 			
 			$(document).on('submit', '#todjango', function(e) {
 				e.preventDefault();
