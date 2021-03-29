@@ -89,18 +89,6 @@ function setValue(uid) {
         const traveltime = Number(document.getElementById('travel-time').value);
         const age = getAge(dob);
     
-        console.log(document.getElementById("submission").value);
-        console.log(dob);
-        console.log(age);
-        console.log(state);
-        console.log(contact);
-        console.log(smell_taste);
-        console.log(fatigue);
-        console.log(appetite);
-        console.log(cough);
-        console.log(compromised);
-        console.log(vaccinated);
-
         userRef.set({
             state: state,
             level_of_contact: contact,

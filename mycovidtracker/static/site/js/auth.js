@@ -1,6 +1,3 @@
-// retrieve data
-/*db.collection*/
-
 // change states w/ login status
 auth.onAuthStateChanged(user => {
     if (user) {
