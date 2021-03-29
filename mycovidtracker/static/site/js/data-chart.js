@@ -30,7 +30,6 @@ $('#start-year').change(function() {
 
 $('#prediction-days').change(function() {
     end_date = getDateString(getEndDate());
-    console.log(end_date);
     destroyChartIfExists();
     generateChart(stateName, start_date, end_date);
 });
@@ -74,7 +73,6 @@ function generateChart(stateName, start_date, end_date) {
             }
         }
     });
-    console.log(chart.data);
 }
 
 function getStartDate() {
