@@ -360,6 +360,10 @@
 								</form>
 							</div>
 						</div>
+						<div class="row center-align">
+							<p class="grey-text">Historical data pulled directly from <a href="https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36" target="_blank" rel="noopener noreferrer">CDC Data Catalog</a>.</p>
+							<p class="grey-text">Forecast data last updated: <span id="updated-date" class="grey-text" style="font-weight: bold;">(date)</span></p>
+						</div>
 					</div>
 				</div>
 				<h5 class="logged-out center-align">Please<a href="#" onclick="$('#modal-login').modal('open');"> Login </a> or <a href="#" onclick="$('#modal-signup').modal('open');"> Sign Up </a>for Risk Assessment</h5>
@@ -369,7 +373,7 @@
 							<div class="col s12 center-align logged-in">
 								<h5>Risk Factors</h5>
 							</div>
-							<div class="col col s6 m6 l4 offset-l4 offset-m3 offset-s3"">
+							<div class="col s6 m6 l4 offset-l4 offset-m3 offset-s3">
 								<div class="input-field">
 									<label for="travel-time">Enter the amount of days you plan to travel to the given state:</label>
 									<br>
@@ -532,6 +536,7 @@
 					yearRange: [1900, today.getFullYear()],
 					showClearBtn: true
 				});
+				getLastUpdatedDateAsString();
 			});
 			
 			$(document).on('submit', '#todjango', function(e) {
@@ -558,7 +563,7 @@
 	<footer class="page-footer teal">
 		<div class="container" style="width: 98%; max-width:1920px;">
 			<div class="row">
-				<p>Â© 2021 MyCovidTracker</p>
+				<p>© 2021 MyCovidTracker</p>
 			</div>
 		</div>
 	</footer>

@@ -46,6 +46,13 @@ function getForecastData() {
     });
 }
 
+function pullMetadata() {
+    return new Promise(function (resolve, reject) {
+        var gsRef = storage.ref('forecast_data.json');
+        resolve(gsRef.getMetadata());
+    });
+}
+
 $.ajax({
     url: "https://data.cdc.gov/resource/9mfq-cb36.json",
     type: "GET",
@@ -69,6 +76,12 @@ async function setForecastData() {
     var data = await getForecastData();
     console.log(data);
     forecastData = data;
+}
+
+async function getLastUpdatedDateAsString() {
+    var metadata = await pullMetadata();
+    var date = new Date(metadata.updated).toUTCString();
+    document.getElementById("updated-date").innerHTML = date;
 }
 
 // Use this function to grab chart data

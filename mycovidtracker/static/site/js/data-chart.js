@@ -78,11 +78,11 @@ function generateChart(stateName, start_date, end_date) {
 }
 
 function getStartDate() {
-    return  document.getElementById('start-year').value
-            + "-"
-            + document.getElementById('start-month').value
-            + "-"
-            + document.getElementById('start-day').value;
+    return  document.getElementById('start-year').value +
+            "-" +
+            document.getElementById('start-month').value +
+            "-" +
+            document.getElementById('start-day').value;
 }
 
 function getDateString(date) {
