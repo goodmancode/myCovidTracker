@@ -117,7 +117,7 @@ class RiskAssessment:
         risk_string = ''
 
         if risk_value > 0.0 and risk_value <= .20:
-            risk_string = 'Low - Travel is reccommended'
+            risk_string = 'Low - Travel is recommended'
         elif risk_value > 0.20 and risk_value <= .40:
             risk_string = 'Low - Travel with low exposure'
         elif risk_value > 0.40 and risk_value <= .60:
@@ -125,6 +125,6 @@ class RiskAssessment:
         elif risk_value > 0.60 and risk_value <= .80:
             risk_string = 'Medium - Travel with high caution'
         elif risk_value > 0.80 and risk_value <= 1.0:
-            risk_string = 'High - Travel not reccommended'
+            risk_string = 'High - Travel not recommended'
 
         return risk_value, risk_string
