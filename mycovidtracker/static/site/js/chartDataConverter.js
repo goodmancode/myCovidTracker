@@ -6,7 +6,6 @@ function getForecastData() {
         var gsRef = storage.ref('forecast_data.json');
         gsRef.getDownloadURL()
             .then((url) => {
-                console.log(url);
                 var xhr = new XMLHttpRequest();
                 xhr.responseType = 'json';
                 xhr.open('GET', url, true);
@@ -14,7 +13,6 @@ function getForecastData() {
                     var status = xhr.status;
                     if (status == 200) {
                         var data = xhr.response;
-                        console.log(data);
                         resolve(data);
                     }
                     else {
@@ -74,13 +72,12 @@ async function setHistoricalData(data) {
 
 async function setForecastData() {
     var data = await getForecastData();
-    console.log(data);
     forecastData = data;
 }
 
-async function getLastUpdatedDateAsString() {
+async function setLastCreatedDateAsString() {
     var metadata = await pullMetadata();
-    var date = new Date(metadata.updated).toUTCString();
+    var date = new Date(metadata.timeCreated).toUTCString();
     document.getElementById("updated-date").innerHTML = date;
 }
 

@@ -558,7 +558,7 @@
 					yearRange: [1900, today.getFullYear()],
 					showClearBtn: true
 				});
-				getLastUpdatedDateAsString();
+				setLastCreatedDateAsString();
 			});
 
 			function setGaugeValue(gauge, value) {
@@ -569,9 +569,6 @@
 					gauge.querySelector(".gauge-fill").style.transform = `rotate(${
 						value / 2
 					}turn)`;
-					/*gauge.querySelector(".gauge-cover").textContent = `${Math.round(
-						value * 100
-					)}%`;*/
 					}
 			
 			$(document).on('submit', '#todjango', function(e) {
